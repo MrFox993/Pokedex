@@ -1,0 +1,28 @@
+.bg-navbar {
+    background-color: rgb(6, 36, 46);
+}
+.bg-navbar .navbar-brand, 
+.bg-navbar .form-control, 
+.bg-navbar .btn {
+    color: white;
+}
+.bg-navbar .form-control::placeholder {
+    color: rgba(0, 0, 0, 0.7);
+}
+.bg-navbar .btn {
+    border-color: white;
+}
+.bg-navbar .btn:hover {
+    /* background-color: white; */
+    color: rgba(250, 250, 250, 0.75);
+}
+.navbar-brand img {
+    margin-right: 8px;
+}
+.form-control {
+    max-width: 300px;
+    font-weight: bold;
+}
+.navbar-brand:hover {
+    color: rgba(200, 200, 200, 0.75) !important;
+}
