@@ -26,3 +26,6 @@
 .navbar-brand:hover {
     color: rgba(200, 200, 200, 0.75) !important;
 }
+nav{
+    margin-bottom: 20px;
+}

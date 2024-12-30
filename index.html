@@ -29,10 +29,16 @@
             <div class="container-fluid">
                 <a class="navbar-brand" href="./index.html">
                     <svg width="30" height="30" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="15" cy="15" r="10" fill="none" stroke="white" stroke-width="2" />
-                        <circle cx="15" cy="15" r="3" fill="none" stroke="white" stroke-width="2" />
-                        <line x1="5" y1="15" x2="10" y2="15" stroke="white" stroke-width="2" />
-                        <line x1="20" y1="15" x2="25" y2="15" stroke="white" stroke-width="2" />
+                        <defs>
+                            <linearGradient id="circle-fill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="50%" stop-color="red" />
+                                <stop offset="50%" stop-color="white" />
+                            </linearGradient>
+                        </defs>
+                        <circle cx="15" cy="15" r="10" fill="url(#circle-fill)" stroke="black" stroke-width="2" />
+                        <circle cx="15" cy="15" r="3" fill="white" stroke="black" stroke-width="2" />
+                        <line x1="6" y1="15" x2="12" y2="15" stroke="black" stroke-width="2" />
+                        <line x1="18" y1="15" x2="24" y2="15" stroke="black" stroke-width="2" />
                     </svg>
                     Pokedex
                 </a>
@@ -43,7 +49,7 @@
         </nav>
     </header>
     <main>
-        <div id="content"></div>
+        <div id="content" class="content"></div>
     </main>
   </body>
 </html>
