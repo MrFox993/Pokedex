@@ -12,3 +12,13 @@
 .column {
     flex-direction: column;
 }
+
+.row {
+    flex-direction: row;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
