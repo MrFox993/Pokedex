@@ -4,9 +4,8 @@ let offset = 0;
 let allPokemons = [];
 let currentPokemons = [];
 
-function init() {
-    fetchFirstData();
-    currentPokemons = allPokemons;
+async function init() {
+    storeFetchedData();
 }
 
 async function fetchFirstData() {
@@ -14,16 +13,30 @@ async function fetchFirstData() {
     let responseJson = await response.json();
     console.log(responseJson);
     let fetchResults = await responseJson.results;
+    return new Promise((resolve, reject) => {
+        if (response.ok) {
+            resolve(fetchResults);
+        }
+        else {
+            reject(`Fetching data failed status code ${response.status}`);
+        }
+    })
 
-    for (let index = 0; index < responseJson.results.length; index++) {
-        await allPokemons.push(fetchResults[index]);
-    }
-    renderPokemons();
 };
 
-async function renderPokemons() {
+async function storeFetchedData() {
+    try {
+        let fetchedData = await fetchFirstData();
+        allPokemons = fetchedData;
+        currentPokemons = allPokemons;
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+function renderPokemons() {
     let contentRef = document.getElementById('content');
-    for (let pokemonIndex = 0; pokemonIndex < await currentPokemons.length; pokemonIndex++) {
+    for (let pokemonIndex = 0; pokemonIndex < currentPokemons.length; pokemonIndex++) {
         contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
     }
 }
