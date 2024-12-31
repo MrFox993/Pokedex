@@ -65,14 +65,29 @@ function formatPokemonData(allFetchedPokemons) {
             url: pokemon.url,
             details: pokemon.details,
             types: pokemon.details.types.map(type => type.type.name),
-            image: pokemon.details.sprites.front_default
+            image_default: pokemon.details.sprites.other['official-artwork'].front_default,
+            image_shiny: pokemon.details.sprites.other['official-artwork'].front_shiny
+
         };
     });
 }
 
-function renderPokemons() {
+async function renderPokemons() {
   let contentRef = document.getElementById("content");
   for (let pokemonIndex = 0; pokemonIndex < currentPokemons.length; pokemonIndex++) {
     contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
   }
+  renderPokemonTypes();
+}
+
+async function renderPokemonTypes() {
+    for (let pokemonIndex = 0; pokemonIndex < currentPokemons.length; pokemonIndex++) {
+        let cardTypesRef = document.getElementById(`card-types-${currentPokemons[pokemonIndex].id}`);
+        let pokemonType = currentPokemons[pokemonIndex].types;
+        cardTypesRef.innerHTML = "";
+        for (let typeIndex = 0; typeIndex < pokemonType.length; typeIndex++) {
+            cardTypesRef.innerHTML += getTypeHTMLTemplate(pokemonIndex, typeIndex);    
+        }
+    }
+
 }
