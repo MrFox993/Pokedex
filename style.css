@@ -42,3 +42,9 @@
     align-items: center;
     background-color: rgb(8, 50, 64) !important;
 }
+
+.card-footer img {
+    width: 80px;
+    height: 80px;
+    border-radius: 1rem;
+}
