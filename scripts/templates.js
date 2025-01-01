@@ -38,3 +38,9 @@ function getLoadingSpinnerHTMLTemplate() {
         </svg>
     `;
 }
+
+function getLoadMoreButtonHTMLTemplate() {
+    return `
+        <button class="btn btn-secondary" type="button" onclick="storeMoreFetchedData()">Load more</button>
+    `;
+}

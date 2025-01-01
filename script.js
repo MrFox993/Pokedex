@@ -1,5 +1,5 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
-let limit = 20;
+let limit = 25;
 let offset = 0;
 let allFetchedPokemons = [];
 let allFormattedPokemons = [];
@@ -8,6 +8,7 @@ let currentPokemons = [];
 async function init() {
   renderLoadingSpinner();
   storeFetchedData();
+  renderLoadMoreButton();
 }
 
 async function fetchFirstData() {
@@ -132,6 +133,13 @@ function renderLoadingSpinner() {
   loadingSpinnerRef.innerHTML = "";
   loadingSpinnerRef.innerHTML = getLoadingSpinnerHTMLTemplate();
   loadingSpinnerRef.classList.add('d_none');
+}
+
+async function renderLoadMoreButton() {
+  await fetchFirstData();
+  let loadMoreBtnRef = document.getElementById('load-more-btn');
+  loadMoreBtnRef.innerHTML = "";
+  loadMoreBtnRef.innerHTML = getLoadMoreButtonHTMLTemplate();
 }
 
 function showLoadingSpinner() {
