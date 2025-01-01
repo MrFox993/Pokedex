@@ -6,6 +6,7 @@ let allFormattedPokemons = [];
 let currentPokemons = [];
 
 async function init() {
+  renderLoadingSpinner();
   storeFetchedData();
 }
 
@@ -106,6 +107,7 @@ async function fetchMoreData() {
 
 async function storeMoreFetchedData() {
   try {
+    showLoadingSpinner();
     let fetchedData = await fetchMoreData();
     allFetchedPokemons = fetchedData;
     await fetchPokemonData();
@@ -116,4 +118,24 @@ async function storeMoreFetchedData() {
   } catch (error) {
     console.error(error);
   }
+  finally {
+    hideLoadingSpinner();
+  }
+}
+
+function renderLoadingSpinner() {
+  let loadingSpinnerRef = document.getElementById("loading-overlay");
+  loadingSpinnerRef.innerHTML = "";
+  loadingSpinnerRef.innerHTML = getLoadingSpinnerHTMLTemplate();
+  loadingSpinnerRef.classList.add('d_none');
+}
+
+function showLoadingSpinner() {
+  let loadingSpinnerRef = document.getElementById('loading-overlay');
+  loadingSpinnerRef.classList.remove('d_none');
+}
+
+function hideLoadingSpinner() {
+  let loadingSpinnerRef = document.getElementById('loading-overlay');
+  loadingSpinnerRef.classList.add('d_none');
 }
