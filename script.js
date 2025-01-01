@@ -45,6 +45,7 @@ async function fetchPokemonData() {
 
 async function storeFetchedData() {
   try {
+    showLoadingSpinner();
     let fetchedData = await fetchFirstData();
     allFetchedPokemons = fetchedData;
     await fetchPokemonData();
@@ -54,6 +55,9 @@ async function storeFetchedData() {
     renderPokemons();
   } catch (error) {
     console.error(error);
+  }
+  finally {
+    hideLoadingSpinner();
   }
 }
 
