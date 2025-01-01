@@ -1,0 +1,4 @@
+.btn-secondary {
+    --bs-btn-font-weight: 600 !important;
+    --bs-btn-font-size: 2rem !important;
+}

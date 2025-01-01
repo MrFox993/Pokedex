@@ -11,3 +11,7 @@ body {
 header{
     width: -webkit-fill-available;
 }
+
+.d_none {
+    display: none !important;
+}
