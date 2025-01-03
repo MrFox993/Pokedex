@@ -11,6 +11,9 @@ async function init() {
 }
 
 async function fetchFirstData() {
+  if (allFetchedPokemons.length != 0) {
+    offset += limit;
+  }
   let response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
   let responseJson = await response.json();
   //   console.log(responseJson);
@@ -95,38 +98,38 @@ async function renderPokemonTypes() {
   }
 }
 
-async function fetchMoreData() {
-  offset += limit;
-  let newFetchedData = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
-  let newFetchedDataJson = await newFetchedData.json();
-  let fetchResults = await newFetchedDataJson.results;
-  console.log(`fetchResults more Data`, fetchResults);
-  return new Promise((resolve, reject) => {
-    if (newFetchedData.ok) {
-      resolve(fetchResults);
-    } else {
-      reject(`Fetching data failed status code ${response.status}`);
-    }
-  });
-}
+// async function fetchMoreData() {
+//   offset += limit;
+//   let newFetchedData = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
+//   let newFetchedDataJson = await newFetchedData.json();
+//   let fetchResults = await newFetchedDataJson.results;
+//   // console.log(`fetchResults more Data`, fetchResults);
+//   return new Promise((resolve, reject) => {
+//     if (newFetchedData.ok) {
+//       resolve(fetchResults);
+//     } else {
+//       reject(`Fetching data failed status code ${newFetchedData.status}`);
+//     }
+//   });
+// }
 
-async function storeMoreFetchedData() {
-  try {
-    showLoadingSpinner();
-    let fetchedData = await fetchMoreData();
-    allFetchedPokemons = fetchedData;
-    await fetchPokemonData();
-    allFormattedPokemons = formatPokemonData(allFetchedPokemons);
-    currentPokemons = allFormattedPokemons;
-    console.log(`allformattedPokemons: `, allFormattedPokemons);
-    renderPokemons();
-  } catch (error) {
-    console.error(error);
-  }
-  finally {
-    hideLoadingSpinner();
-  }
-}
+// async function storeMoreFetchedData() {
+//   try {
+//     showLoadingSpinner();
+//     let fetchedData = await fetchMoreData();
+//     allFetchedPokemons = fetchedData;
+//     await fetchPokemonData();
+//     allFormattedPokemons = formatPokemonData(allFetchedPokemons);
+//     currentPokemons = allFormattedPokemons;
+//     console.log(`allformattedPokemons: `, allFormattedPokemons);
+//     renderPokemons();
+//   } catch (error) {
+//     console.error(error);
+//   }
+//   finally {
+//     hideLoadingSpinner();
+//   }
+// }
 
 function renderLoadingSpinner() {
   let loadingSpinnerRef = document.getElementById("loading-overlay");

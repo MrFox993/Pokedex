@@ -47,6 +47,6 @@ function getLoadingSpinnerHTMLTemplate() {
 
 function getLoadMoreButtonHTMLTemplate() {
   return `
-        <button class="btn btn-secondary" type="button" onclick="storeMoreFetchedData()">Load more</button>
+        <button class="btn btn-secondary" type="button" onclick="storeFetchedData()">Load more</button>
     `;
 }
