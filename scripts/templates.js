@@ -1,27 +1,24 @@
-function getCardsHTMLTemplate(pokemonIndex) {
-    if (filteredPokemon.length > 0) {
-        allPokemon = filteredPokemon;
-    }
+function getCardsHTMLTemplate(pokemon) {
   return `
     <div class="card">
         <div class="card-body flex column">
             <div class= "card-header">
-                <h5 class="card-title"># ${allPokemon[pokemonIndex].id}</h5>
-                <h3 class="card-subtitle mb-2 text-body-secondary">${allPokemon[pokemonIndex].name}</h3>
+                <h5 class="card-title"># ${pokemon.id}</h5>
+                <h3 class="card-subtitle mb-2 text-body-secondary">${pokemon.name}</h3>
             </div>
-            <img class="${allPokemon[pokemonIndex].types[0]} pokeball-bgr pokemon-img" src="${allPokemon[pokemonIndex].image_default}" alt="${allPokemon[pokemonIndex].name}">
-            <div id="card-types-${allPokemon[pokemonIndex].id}" class="card-footer">
-                <p>${allPokemon[pokemonIndex].types[0]}</p>
-                <p>${allPokemon[pokemonIndex].types[1]}</p>
+            <img class="${pokemon.types[0]} pokeball-bgr pokemon-img" src="${pokemon.image_default}" alt="${pokemon.name}">
+            <div id="card-types-${pokemon.id}" class="card-footer">
+                <p>${pokemon.types[0]}</p>
+                <p>${pokemon.types[1]}</p>
             </div>
         </div>
     </div>
     `;
 }
 
-function getTypeHTMLTemplate(pokemonIndex, typeIndex) {
+function getTypeHTMLTemplate(pokemon, typeIndex) {
   return `
-        <img class="${allPokemon[pokemonIndex].types[typeIndex]}" src="./assets/img/${allPokemon[pokemonIndex].types[typeIndex]}.png" alt="${allPokemon[pokemonIndex].types[typeIndex]}">
+        <img class="${pokemon.types[typeIndex]}" src="./assets/img/${pokemon.types[typeIndex]}.png" alt="${pokemon.types[typeIndex]}">
     `;
 }
 

@@ -4,7 +4,7 @@ let offset = 0;
 let fetchedPokemon = [];
 let formattedPokemon = [];
 let allPokemon = [];
-let filteredPokemon = [];
+let filteredPokemon = [...allPokemon];
 
 async function init() {
   renderLoadingSpinner();
@@ -53,11 +53,11 @@ async function storeFetchedData() {
     await fetchPokemonData();
     formattedPokemon = formatPokemonData(fetchedPokemon);
     allPokemon.push(...formattedPokemon);
+    filteredPokemon = [...allPokemon];
     renderAllPokemon();
   } catch (error) {
     console.error(error);
-  }
-  finally {
+  } finally {
     hideLoadingSpinner();
   }
 }
@@ -79,20 +79,20 @@ function formatPokemonData(fetchedPokemon) {
 function renderAllPokemon() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
-  for (let pokemonIndex = 0; pokemonIndex < allPokemon.length; pokemonIndex++) {
-    contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
+  for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
+    contentRef.innerHTML += getCardsHTMLTemplate(filteredPokemon[pokemonIndex]);
   }
   renderAllPokemonTypes();
   renderLoadMoreButton();
 }
 
 async function renderAllPokemonTypes() {
-  for (let pokemonIndex = 0; pokemonIndex < allPokemon.length; pokemonIndex++) {
+  for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
     let cardTypesRef = document.getElementById(`card-types-${allPokemon[pokemonIndex].id}`);
-    let pokemonType = allPokemon[pokemonIndex].types;
+    let pokemonType = filteredPokemon[pokemonIndex].types;
     cardTypesRef.innerHTML = "";
     for (let typeIndex = 0; typeIndex < pokemonType.length; typeIndex++) {
-      cardTypesRef.innerHTML += getTypeHTMLTemplate(pokemonIndex, typeIndex);
+      cardTypesRef.innerHTML += getTypeHTMLTemplate(filteredPokemon[pokemonIndex], typeIndex);
     }
   }
 }
@@ -101,47 +101,41 @@ function renderLoadingSpinner() {
   let loadingSpinnerRef = document.getElementById("loading-overlay");
   loadingSpinnerRef.innerHTML = "";
   loadingSpinnerRef.innerHTML = getLoadingSpinnerHTMLTemplate();
-  loadingSpinnerRef.classList.add('d_none');
+  loadingSpinnerRef.classList.add("d_none");
 }
 
 function renderLoadMoreButton() {
-  let loadMoreBtnRef = document.getElementById('load-more-btn');
+  let loadMoreBtnRef = document.getElementById("load-more-btn");
   loadMoreBtnRef.innerHTML = "";
   loadMoreBtnRef.innerHTML = getLoadMoreButtonHTMLTemplate();
 }
 
 function showLoadingSpinner() {
-  let loadingSpinnerRef = document.getElementById('loading-overlay');
-  loadingSpinnerRef.classList.remove('d_none');
+  let loadingSpinnerRef = document.getElementById("loading-overlay");
+  loadingSpinnerRef.classList.remove("d_none");
 }
 
 function hideLoadingSpinner() {
-  let loadingSpinnerRef = document.getElementById('loading-overlay');
-  loadingSpinnerRef.classList.add('d_none');
+  let loadingSpinnerRef = document.getElementById("loading-overlay");
+  loadingSpinnerRef.classList.add("d_none");
 }
 
 function filterPokemonList() {
   let searchInput = document.getElementById("pokemon-search").value.toLowerCase();
-  
+
   if (searchInput.length >= 3) {
-      let searchedPokemon = allPokemon.filter(pokemon =>
-          pokemon.name.toLowerCase().includes(searchInput)
-      );
-      console.log(`searchedPokemon: `, searchedPokemon);
-      filteredPokemon = searchedPokemon;
-      console.log(`filteredPokemon: `, filteredPokemon);
-      renderFilteredPokemons(searchedPokemon);
+    filteredPokemon = allPokemon.filter((pokemon) => pokemon.name.toLowerCase().includes(searchInput));
   } else {
-      filteredPokemon = [];
-      renderAllPokemon();
+    filteredPokemon = [...allPokemon];
   }
+  renderAllPokemon();
 }
 
-async function renderFilteredPokemons(searchedPokemon) {
+function renderFilteredPokemons() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
 
   for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
-      contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
+    contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
   }
 }
