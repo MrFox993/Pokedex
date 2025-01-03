@@ -53,8 +53,9 @@ async function storeFetchedData() {
     allFetchedPokemons = fetchedData;
     await fetchPokemonData();
     allFormattedPokemons = formatPokemonData(allFetchedPokemons);
-    currentPokemons = allFormattedPokemons;
+    currentPokemons.push(...allFormattedPokemons);
     console.log(`allformattedPokemons: `, allFormattedPokemons);
+    console.log(`currentPokemons: `, currentPokemons);
     renderPokemons();
   } catch (error) {
     console.error(error);
@@ -80,6 +81,7 @@ function formatPokemonData(allFetchedPokemons) {
 
 async function renderPokemons() {
   let contentRef = document.getElementById("content");
+  contentRef.innerHTML = "";
   for (let pokemonIndex = 0; pokemonIndex < currentPokemons.length; pokemonIndex++) {
     contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
   }
