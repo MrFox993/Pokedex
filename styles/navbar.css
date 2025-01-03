@@ -29,3 +29,6 @@
 nav{
     margin-bottom: 20px;
 }
+.navbar {
+    height: min-content;
+}
