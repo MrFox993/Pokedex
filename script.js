@@ -155,3 +155,17 @@ function hideLoadingSpinner() {
   let loadingSpinnerRef = document.getElementById('loading-overlay');
   loadingSpinnerRef.classList.add('d_none');
 }
+
+function filterPokemonList() {
+  let searchInput = document.getElementById("pokemon-search").value.toLowerCase();
+  
+  if (searchInput.length >= 3) {
+      let filteredPokemons = currentPokemons.filter(pokemon =>
+          pokemon.name.toLowerCase().includes(searchInput)
+      );
+      console.log(`filteredPokemons: `, filteredPokemons);
+      // renderFilteredPokemons(filteredPokemons);
+  } else {
+      renderPokemons();
+  }
+}
