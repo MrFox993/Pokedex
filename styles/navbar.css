@@ -22,6 +22,8 @@
 .form-control {
     max-width: 300px;
     font-weight: bold;
+    width: 100rem !important;
+    height: 5rem;
 }
 .navbar-brand:hover {
     color: rgba(200, 200, 200, 0.75) !important;
@@ -31,4 +33,9 @@ nav{
 }
 .navbar {
     height: min-content;
+}
+.logo {
+    width: 120px;
+    height: 120px;
+    padding-left: 32px;
 }
