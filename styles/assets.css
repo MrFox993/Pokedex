@@ -2,3 +2,9 @@
     --bs-btn-font-weight: 600 !important;
     --bs-btn-font-size: 2rem !important;
 }
+
+@media (max-width: 425px) {
+    .col-6 {
+        width: 75% !important;
+    }
+}

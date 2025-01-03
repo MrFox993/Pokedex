@@ -1,9 +1,10 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 let limit = 25;
 let offset = 0;
-let allFetchedPokemons = [];
-let allFormattedPokemons = [];
-let currentPokemons = [];
+let fetchedPokemon = [];
+let formattedPokemon = [];
+let allPokemon = [];
+let displayedPokemon = [];
 
 async function init() {
   renderLoadingSpinner();
@@ -11,7 +12,7 @@ async function init() {
 }
 
 async function fetchFirstData() {
-  if (allFetchedPokemons.length != 0) {
+  if (fetchedPokemon.length != 0) {
     offset += limit;
   }
   let response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
@@ -30,12 +31,12 @@ async function fetchFirstData() {
 async function fetchPokemonData() {
   return new Promise(async (resolve, reject) => {
     try {
-      for (let pokemonIndex = 0; pokemonIndex < allFetchedPokemons.length; pokemonIndex++) {
-        let response = await fetch(`${allFetchedPokemons[pokemonIndex].url}`);
+      for (let pokemonIndex = 0; pokemonIndex < fetchedPokemon.length; pokemonIndex++) {
+        let response = await fetch(`${fetchedPokemon[pokemonIndex].url}`);
         let responseJson = await response.json();
-        // console.log(`${allFetchedPokemons[pokemonIndex].name} data fetched:`, responseJson);
-        allFetchedPokemons[pokemonIndex] = {
-          ...allFetchedPokemons[pokemonIndex],
+        // console.log(`${fetchedPokemon[pokemonIndex].name} data fetched:`, responseJson);
+        fetchedPokemon[pokemonIndex] = {
+          ...fetchedPokemon[pokemonIndex],
           details: responseJson,
         };
       }
@@ -50,12 +51,12 @@ async function storeFetchedData() {
   try {
     showLoadingSpinner();
     let fetchedData = await fetchFirstData();
-    allFetchedPokemons = fetchedData;
+    fetchedPokemon = fetchedData;
     await fetchPokemonData();
-    allFormattedPokemons = formatPokemonData(allFetchedPokemons);
-    currentPokemons.push(...allFormattedPokemons);
-    console.log(`allformattedPokemons: `, allFormattedPokemons);
-    console.log(`currentPokemons: `, currentPokemons);
+    formattedPokemon = formatPokemonData(fetchedPokemon);
+    allPokemon.push(...formattedPokemon);
+    console.log(`formattedPokemon: `, formattedPokemon);
+    console.log(`allPokemon: `, allPokemon);
     renderPokemons();
   } catch (error) {
     console.error(error);
@@ -65,8 +66,8 @@ async function storeFetchedData() {
   }
 }
 
-function formatPokemonData(allFetchedPokemons) {
-  return allFetchedPokemons.map((pokemon) => {
+function formatPokemonData(fetchedPokemon) {
+  return fetchedPokemon.map((pokemon) => {
     return {
       name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
       id: pokemon.url.split("/").filter(Boolean).pop(),
@@ -82,7 +83,7 @@ function formatPokemonData(allFetchedPokemons) {
 async function renderPokemons() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
-  for (let pokemonIndex = 0; pokemonIndex < currentPokemons.length; pokemonIndex++) {
+  for (let pokemonIndex = 0; pokemonIndex < allPokemon.length; pokemonIndex++) {
     contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
   }
   renderPokemonTypes();
@@ -90,9 +91,9 @@ async function renderPokemons() {
 }
 
 async function renderPokemonTypes() {
-  for (let pokemonIndex = 0; pokemonIndex < currentPokemons.length; pokemonIndex++) {
-    let cardTypesRef = document.getElementById(`card-types-${currentPokemons[pokemonIndex].id}`);
-    let pokemonType = currentPokemons[pokemonIndex].types;
+  for (let pokemonIndex = 0; pokemonIndex < allPokemon.length; pokemonIndex++) {
+    let cardTypesRef = document.getElementById(`card-types-${allPokemon[pokemonIndex].id}`);
+    let pokemonType = allPokemon[pokemonIndex].types;
     cardTypesRef.innerHTML = "";
     for (let typeIndex = 0; typeIndex < pokemonType.length; typeIndex++) {
       cardTypesRef.innerHTML += getTypeHTMLTemplate(pokemonIndex, typeIndex);
@@ -119,11 +120,11 @@ async function renderPokemonTypes() {
 //   try {
 //     showLoadingSpinner();
 //     let fetchedData = await fetchMoreData();
-//     allFetchedPokemons = fetchedData;
+//     fetchedPokemon = fetchedData;
 //     await fetchPokemonData();
-//     allFormattedPokemons = formatPokemonData(allFetchedPokemons);
-//     currentPokemons = allFormattedPokemons;
-//     console.log(`allformattedPokemons: `, allFormattedPokemons);
+//     formattedPokemon = formatPokemonData(fetchedPokemon);
+//     allPokemon = formattedPokemon;
+//     console.log(`formattedPokemon: `, formattedPokemon);
 //     renderPokemons();
 //   } catch (error) {
 //     console.error(error);
@@ -160,7 +161,7 @@ function filterPokemonList() {
   let searchInput = document.getElementById("pokemon-search").value.toLowerCase();
   
   if (searchInput.length >= 3) {
-      let filteredPokemons = currentPokemons.filter(pokemon =>
+      let filteredPokemons = allPokemon.filter(pokemon =>
           pokemon.name.toLowerCase().includes(searchInput)
       );
       console.log(`filteredPokemons: `, filteredPokemons);
@@ -168,4 +169,23 @@ function filterPokemonList() {
   } else {
       renderPokemons();
   }
+}
+
+async function renderFilteredPokemons(filteredPokemons) {
+  let contentRef = document.getElementById("content");
+  contentRef.innerHTML = "";
+
+  for (let pokemonIndex = 0; pokemonIndex < filteredPokemons.length; pokemonIndex++) {
+      contentRef.innerHTML += getCardsHTMLTemplate(filteredPokemons[pokemonIndex]);
+  }
+
+  // Typen der gefilterten Pokémon rendern
+  // for (let pokemonIndex = 0; pokemonIndex < filteredPokemons.length; pokemonIndex++) {
+  //     let cardTypesRef = document.getElementById(`card-types-${filteredPokemons[pokemonIndex].id}`);
+  //     let pokemonType = filteredPokemons[pokemonIndex].types;
+  //     cardTypesRef.innerHTML = "";
+  //     for (let typeIndex = 0; typeIndex < pokemonType.length; typeIndex++) {
+  //         cardTypesRef.innerHTML += getTypeHTMLTemplate(pokemonIndex, typeIndex, filteredPokemons);
+  //     }
+  // }
 }

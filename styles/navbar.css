@@ -19,9 +19,8 @@
   margin-right: 8px;
 }
 .form-control {
-  max-width: 300px;
+  max-width: 50rem;
   font-weight: bold;
-  width: 100rem !important;
   height: 5rem;
 }
 .navbar-brand:hover {
@@ -34,14 +33,104 @@ nav {
   height: min-content;
 }
 .logo {
-  width: 140px;
-  height: 120px;
-  padding-left: 32px;
+  width: 240px;
+  height: 220px;
+  padding-left: 64px;
+}
+.logo-text {
+    width: 600px;
 }
 #pokemon-search {
   margin: 20px;
   padding: 10px;
-  width: 300px !important;
-  font-size: 16px;
+  width: 50rem !important;
+  font-size: 36px;
   color: black !important;
+}
+
+@media (max-width: 1920px) {
+    .logo {
+        width: 180px;
+        height: 160px;
+    }
+    .logo-text {
+        width: 480px;
+    }
+    #pokemon-search {
+        width: 25rem !important;
+        font-size: 30px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .logo {
+        width: 140px;
+        height: 120px;
+    }
+    .logo-text {
+        width: 360px;
+    }
+    #pokemon-search {
+        width: 15rem !important;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .logo {
+        width: 130px;
+        height: 90px;
+    }
+    .logo-text {
+        width: 240px;
+    }
+    #pokemon-search {
+        width: 15rem !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .logo {
+        width: 80px;
+        height: 60px;
+        padding-left: 8px;
+    }
+    .logo-text {
+        width: 240px;
+    }
+    #pokemon-search {
+        margin: 0;
+        margin-right: .25rem !important;
+        width: 13rem !important;
+        height: 3rem;
+    }
+}
+@media (max-width: 600px) {
+    .logo {
+        width: 60px;
+        height: 40px;
+
+    }
+    .logo-text {
+        width: 140px;
+    }
+    #pokemon-search {
+        width: 9.9rem !important;
+        font-size: 12px;
+        height: 2.5rem;
+    }
+}
+
+@media (max-width: 425px) {
+    .logo {
+        display: none;
+    }
+    .logo-text {
+        width: 120px;
+    }
+    #pokemon-search {
+        width: 9.2rem !important;
+        font-size: 10px;
+        height: 2.5rem;
+    }
 }
