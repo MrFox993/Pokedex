@@ -52,3 +52,8 @@
 .fairy {
     background-color: #EC8FE5;
 }
+.pokeball-bgr {
+    background-image: url("../assets/img/pokeball_bgr.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+}
