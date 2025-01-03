@@ -1,12 +1,12 @@
 function getCardsHTMLTemplate(pokemonIndex) {
   return `
-    <div class="card" style="width: 18rem;">
+    <div class="card" style="width: 24rem;">
         <div class="card-body flex column">
             <div class= "card-header">
                 <h5 class="card-title"># ${currentPokemons[pokemonIndex].id}</h5>
                 <h3 class="card-subtitle mb-2 text-body-secondary">${currentPokemons[pokemonIndex].name}</h3>
             </div>
-            <img class="${currentPokemons[pokemonIndex].types[0]} pokeball-bgr" src="${currentPokemons[pokemonIndex].image_default}" alt="${currentPokemons[pokemonIndex].name}">
+            <img class="${currentPokemons[pokemonIndex].types[0]} pokeball-bgr pokemon-img" src="${currentPokemons[pokemonIndex].image_default}" alt="${currentPokemons[pokemonIndex].name}">
             <div id="card-types-${currentPokemons[pokemonIndex].id}" class="card-footer">
                 <p>${currentPokemons[pokemonIndex].types[0]}</p>
                 <p>${currentPokemons[pokemonIndex].types[1]}</p>

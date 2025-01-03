@@ -55,5 +55,8 @@
 .pokeball-bgr {
     background-image: url("../assets/img/pokeball_bgr.png");
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
+}
+.pokemon-img{
+    filter: drop-shadow(0px 0px 40px rgba(0, 0, 0, 0.35));;
 }

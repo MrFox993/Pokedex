@@ -1,5 +1,10 @@
 body {
     background-color: rgb(4,23,33) !important;
+    background-image: url("../assets/img/body_bgr.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
     color: white !important;
     display: flex !important;
     flex-direction: column !important;
