@@ -8,7 +8,6 @@ let currentPokemons = [];
 async function init() {
   renderLoadingSpinner();
   storeFetchedData();
-  renderLoadMoreButton();
 }
 
 async function fetchFirstData() {
@@ -82,6 +81,7 @@ async function renderPokemons() {
     contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
   }
   renderPokemonTypes();
+  renderLoadMoreButton();
 }
 
 async function renderPokemonTypes() {
@@ -135,8 +135,7 @@ function renderLoadingSpinner() {
   loadingSpinnerRef.classList.add('d_none');
 }
 
-async function renderLoadMoreButton() {
-  await fetchFirstData();
+function renderLoadMoreButton() {
   let loadMoreBtnRef = document.getElementById('load-more-btn');
   loadMoreBtnRef.innerHTML = "";
   loadMoreBtnRef.innerHTML = getLoadMoreButtonHTMLTemplate();
