@@ -18,6 +18,7 @@
 
 .spinner {
   animation: spin 1.5s linear infinite;
+  width: 250px;
 }
 
 #loading-overlay {

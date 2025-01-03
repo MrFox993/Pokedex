@@ -1,6 +1,7 @@
 const BASE_URL = "https://pokeapi.co/api/v2/pokemon";
 let limit = 25;
 let offset = 0;
+const maxLimit = 10277;
 let fetchedPokemon = [];
 let formattedPokemon = [];
 let allPokemon = [];
@@ -13,7 +14,13 @@ async function init() {
 
 async function fetchFirstData() {
   if (fetchedPokemon.length != 0) {
+    if (offset + limit > maxLimit) {
+      limit = maxLimit - offset;
+    }
     offset += limit;
+    if (offset >= maxLimit) {
+      document.getElementById("load-button").disabled = true;
+    }
   }
   let response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
   let responseJson = await response.json();
