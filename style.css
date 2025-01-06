@@ -64,6 +64,21 @@ h1 {
     text-align: center;
 }
 
+.no-results-header {
+    height: 54px;
+}
+
+.no-results-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 380px;
+}
+
+.no-results-footer {
+    height: 96px;
+}
+
 @media (max-width: 1920px) {
 
 }
