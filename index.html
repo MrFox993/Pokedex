@@ -35,7 +35,7 @@
             <img src="./assets/img/pokedex_curved.png" alt="Pokédex" class="logo-text">
           </a>
           <form class="d-flex ms-auto">
-            <input id="pokemon-search" oninput="filterPokemonList()" class="form-control me-5" type="search" placeholder="Search for a Pokémon..." aria-label="Search" />
+            <input id="pokemon-search" oninput="filterPokemonList()" class="form-control me-5" type="search" placeholder="Search for a Pokémon..." aria-label="Search" onkeydown="if(event.key === 'Enter') event.preventDefault();" />
           </form>
         </div>
       </nav>
