@@ -56,15 +56,11 @@ async function storeFetchedData() {
   try {
     showLoadingSpinner();
     let fetchedData = await fetchFirstData();
-    console.log(fetchedData, "fetched data");
     fetchedPokemon = fetchedData;
     await fetchPokemonData();
     formattedPokemon = formatPokemonData(fetchedPokemon);
-    console.log(formattedPokemon, "formatted Pokemon");
     allPokemon.push(...formattedPokemon);
-    console.log(allPokemon, "all Pokemon");
     filterPokemonList();
-    console.log(filteredPokemon, "filtered Pokemon");
     renderFilteredPokemons();
   } catch (error) {
     console.error(error);
@@ -146,7 +142,17 @@ function filterPokemonList() {
   } else {
     filteredPokemon = [...allPokemon];
   }
-  renderFilteredPokemons();
+
+  if (filteredPokemon.length === 0) {
+    renderNoResultsFound();
+  } else {
+    renderFilteredPokemons();
+  }
+}
+
+function renderNoResultsFound() {
+  let contentRef = document.getElementById("content");
+  contentRef.innerHTML = getNoResultsHTMLTemplate();
 }
 
 function renderFilteredPokemons() {
@@ -154,6 +160,7 @@ function renderFilteredPokemons() {
   contentRef.innerHTML = "";
   if (!filteredPokemon || filteredPokemon.length === 0) {
     console.error('filteredPokemon is undefined or empty');
+    renderNoResultsFound();
     return;
   }
   for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {

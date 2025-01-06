@@ -59,6 +59,11 @@
     border-radius: 1rem;
 }
 
+h1 {
+    color: black !important;
+    text-align: center;
+}
+
 @media (max-width: 1920px) {
 
 }

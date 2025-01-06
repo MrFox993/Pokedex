@@ -33,3 +33,22 @@ function getLoadMoreButtonHTMLTemplate() {
         <button class="btn btn-secondary" type="button" onclick="storeFetchedData()" id="load-button">Load more</button>
     `;
 }
+
+function getNoResultsHTMLTemplate() {
+  return `
+  <div class="card">
+  <div class="card-body flex column">
+      <div class= "card-header">
+          <h5 class="card-title"></h5>
+          <h3 class="card-subtitle mb-2 text-body-secondary"></h3>
+      </div>
+      <h1 class="">No results found</h1>
+      <div class="card-footer">
+          <p></p>
+          <p></p>
+      </div>
+  </div>
+</div>
+  `;
+}
+
