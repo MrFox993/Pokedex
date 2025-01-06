@@ -12,6 +12,7 @@ You can search for Pokémons with following keys: <br>
 - name <br>
 - id <br>
 - type <br>
+<br>
 Hint: The search function extends the load more of new Pokémon. <br>
 <br>
 Detailed information: <br>
