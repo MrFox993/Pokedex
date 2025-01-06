@@ -38,6 +38,13 @@
     width: 24rem;
 }
 
+.card:hover {
+    box-shadow: 0 0 1rem 0.5rem rgb(73, 88, 93);
+    cursor: pointer;
+    width: calc(24rem + 0.5rem);
+    transition: 75ms;
+}
+
 .text-body-secondary {
     --bs-secondary-color: white;
 }
