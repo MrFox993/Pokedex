@@ -137,9 +137,15 @@ function filterPokemonList() {
 
   let searchInput = document.getElementById("pokemon-search").value.toLowerCase();
 
-  if (searchInput.length >= 3) {
-    filteredPokemon = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(searchInput));
-  } else {
+  if (searchInput.length >= 3 || !isNaN(searchInput)) {
+    filteredPokemon = allPokemon.filter(pokemon => {
+      const nameMatch = pokemon.name.toLowerCase().includes(searchInput);
+      const idMatch = !isNaN(searchInput) && pokemon.id.toString().includes(searchInput);
+      const typeMatch = pokemon.types.some(type => type.toLowerCase().includes(searchInput));
+
+      return nameMatch || idMatch || typeMatch;
+    });
+    } else {
     filteredPokemon = [...allPokemon];
   }
 
