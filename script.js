@@ -176,3 +176,19 @@ function renderFilteredPokemons() {
   renderAllPokemonTypes();
   renderLoadMoreButton();
 }
+
+function loadPokemonInfoCard(pokemonIndex) {
+  let pokemon = filteredPokemon[pokemonIndex];
+  console.log("pokemon", pokemon);
+  let modalHTML = getModalContentHTMLTemplate(pokemon, pokemonIndex);
+
+  document.body.insertAdjacentHTML("beforeend", modalHTML);
+
+  let modalElement = document.getElementById("pokemonInfoModal");
+  let modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
+
+  modalInstance._element.addEventListener("hidden.bs.modal", () => {
+    modalElement.remove();
+  });
+}
