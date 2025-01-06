@@ -5,7 +5,7 @@ const maxLimit = 10277;
 let fetchedPokemon = [];
 let formattedPokemon = [];
 let allPokemon = [];
-let filteredPokemon = [...allPokemon];
+let filteredPokemon = [];
 
 async function init() {
   renderLoadingSpinner();
@@ -56,12 +56,16 @@ async function storeFetchedData() {
   try {
     showLoadingSpinner();
     let fetchedData = await fetchFirstData();
+    console.log(fetchedData, "fetched data");
     fetchedPokemon = fetchedData;
     await fetchPokemonData();
     formattedPokemon = formatPokemonData(fetchedPokemon);
+    console.log(formattedPokemon, "formatted Pokemon");
     allPokemon.push(...formattedPokemon);
-    filteredPokemon = [...allPokemon];
-    renderAllPokemon();
+    console.log(allPokemon, "all Pokemon");
+    filterPokemonList();
+    console.log(filteredPokemon, "filtered Pokemon");
+    renderFilteredPokemons();
   } catch (error) {
     console.error(error);
   } finally {
@@ -95,11 +99,13 @@ function renderAllPokemon() {
 
 async function renderAllPokemonTypes() {
   for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
-    let cardTypesRef = document.getElementById(`card-types-${allPokemon[pokemonIndex].id}`);
+    let cardTypesRef = document.getElementById(`card-types-${filteredPokemon[pokemonIndex].id}`);
     let pokemonType = filteredPokemon[pokemonIndex].types;
     cardTypesRef.innerHTML = "";
     for (let typeIndex = 0; typeIndex < pokemonType.length; typeIndex++) {
+      if (pokemonType[typeIndex]){
       cardTypesRef.innerHTML += getTypeHTMLTemplate(filteredPokemon[pokemonIndex], typeIndex);
+      }
     }
   }
 }
@@ -128,21 +134,32 @@ function hideLoadingSpinner() {
 }
 
 function filterPokemonList() {
+  if (!allPokemon) {
+    console.error('allPokemon is undefined');
+    return [];
+  }
+
   let searchInput = document.getElementById("pokemon-search").value.toLowerCase();
 
   if (searchInput.length >= 3) {
-    filteredPokemon = allPokemon.filter((pokemon) => pokemon.name.toLowerCase().includes(searchInput));
+    filteredPokemon = allPokemon.filter(pokemon => pokemon.name.toLowerCase().includes(searchInput));
   } else {
     filteredPokemon = [...allPokemon];
   }
-  renderAllPokemon();
+  renderFilteredPokemons();
 }
 
 function renderFilteredPokemons() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
-
-  for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
-    contentRef.innerHTML += getCardsHTMLTemplate(pokemonIndex);
+  if (!filteredPokemon || filteredPokemon.length === 0) {
+    console.error('filteredPokemon is undefined or empty');
+    return;
   }
+  for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
+    let pokemon = filteredPokemon[pokemonIndex];
+    contentRef.innerHTML += getCardsHTMLTemplate(pokemon);
+  }
+  renderAllPokemonTypes();
+  renderLoadMoreButton();
 }
