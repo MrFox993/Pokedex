@@ -3,6 +3,14 @@
     --bs-btn-font-size: 2rem !important;
 }
 
+.w-33 {
+    width: 33% !important;
+}
+
+.btn-close {
+    filter: invert(1) !important;
+}
+
 @media (max-width: 425px) {
     .col-6 {
         width: 75% !important;

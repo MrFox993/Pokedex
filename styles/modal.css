@@ -1,0 +1,17 @@
+.modal-header {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(8, 50, 64) !important;
+}
+
+.modal-types {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: rgb(8, 50, 64) !important;
+}
+
+.modal-footer {
+    background-color: rgb(11,56,72) !important;
+}

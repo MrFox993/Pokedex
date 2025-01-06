@@ -55,16 +55,17 @@ function getNoResultsHTMLTemplate() {
 }
 
 function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
+    let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
   return `
     <div class="modal fade" id="pokemonInfoModal" tabindex="-1" aria-labelledby="pokemonInfoModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="pokemonInfoModalLabel">#${pokemon.id} - ${pokemon.name}</h5>
+            <h5 class="modal-title" id="pokemonInfoModalLabel">#${pokemonId} - ${pokemon.name}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
-          <div class="modal-body">
-            <div class="d-flex flex-column align-items-center">
+          <div class="modal-body p-0">
+            <div class="d-flex flex-column align-items-center ${pokemon.types[0]}">
               <div class="d-flex align-items-center">
                 <button class="btn btn-secondary me-3" onclick="navigatePokemon(${pokemonIndex - 1})">
                   <i class="bi bi-arrow-left-circle"></i>
@@ -74,34 +75,37 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                   <i class="bi bi-arrow-right-circle"></i>
                 </button>
               </div>
-              <div class="mt-3">
+            </div>
+              <div class="pt-3 modal-types">
                 <p><strong>Types:</strong> ${pokemon.types.join(", ")}</p>
               </div>
+            <div class="modal-footer d-flex column align-items-center">
+                <ul class="nav nav-tabs mt-4 w-100 d-flex align-items-center justify-content-evenly" id="pokemonTab" role="tablist">
+                <li class="nav-item w-33 text-center" role="presentation">
+                    <button class="nav-link w-100 active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="true">About</button>
+                </li>
+                <li class="nav-item w-33 text-center" role="presentation">
+                    <button class="nav-link w-100" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="false">Stats</button>
+                </li>
+                <li class="nav-item w-33 text-center" role="presentation">
+                    <button class="nav-link w-100" id="evolutions-tab" data-bs-toggle="tab" data-bs-target="#evolutions" type="button" role="tab" aria-controls="evolutions" aria-selected="false">Evolutions</button>
+                </li>
+                </ul>
+                <div class="tab-content mt-3">
+                <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                    <p><strong>Height:</strong> ${pokemon.details.height}</p>
+                    <p><strong>Weight:</strong> ${pokemon.details.weight}</p>
+                    <p><strong>Abilities:</strong> ${pokemon.details.abilities
+                    .map((ability) => ability.ability.name)
+                    .join(", ")}</p>
+                </div>
+                <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+                    <p>Stats information goes here.</p>
+                </div>
+                <div class="tab-pane fade" id="evolutions" role="tabpanel" aria-labelledby="evolutions-tab">
+                    <p>Evolution information goes here.</p>
+                </div>
             </div>
-            <ul class="nav nav-tabs mt-4" id="pokemonTab" role="tablist">
-              <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="true">About</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="false">Stats</button>
-              </li>
-              <li class="nav-item" role="presentation">
-                <button class="nav-link" id="evolutions-tab" data-bs-toggle="tab" data-bs-target="#evolutions" type="button" role="tab" aria-controls="evolutions" aria-selected="false">Evolutions</button>
-              </li>
-            </ul>
-            <div class="tab-content mt-3">
-              <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-                <p><strong>Base Experience:</strong> ${pokemon.details.base_experience}</p>
-                <p><strong>Abilities:</strong> ${pokemon.details.abilities
-                  .map((ability) => ability.ability.name)
-                  .join(", ")}</p>
-              </div>
-              <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
-                <p>Stats information goes here.</p>
-              </div>
-              <div class="tab-pane fade" id="evolutions" role="tabpanel" aria-labelledby="evolutions-tab">
-                <p>Evolution information goes here.</p>
-              </div>
             </div>
           </div>
         </div>
