@@ -93,14 +93,46 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                 </ul>
                 <div class="tab-content mt-3">
                 <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
-                    <p><strong>Height:</strong> ${pokemon.details.height}</p>
-                    <p><strong>Weight:</strong> ${pokemon.details.weight}</p>
-                    <p><strong>Abilities:</strong> ${pokemon.details.abilities
-                    .map((ability) => ability.ability.name)
-                    .join(", ")}</p>
+                    <table>
+                        <tr>
+                            <td><strong>Height</strong></td>
+                            <td>${pokemon.details.height} m</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Weight</strong></td>
+                            <td>${pokemon.details.weight} kg</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Abilities</strong></td>
+                            <td>${pokemon.details.abilities
+                                .map((ability) => ability.ability.name)
+                                .join(", ")}</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
-                    <p>Stats information goes here.</p>
+                <table>
+                <tr>
+                    <td><strong>HP</strong></td>
+                    <td>${pokemon.stats.hp}</td>
+                </tr>
+                <tr>
+                    <td><strong>Attack</strong></td>
+                    <td>${pokemon.stats.attack}</td>
+                </tr>
+                <tr>
+                    <td><strong>Defense</strong></td>
+                    <td>${pokemon.stats.defense}</td>
+                </tr>
+                <tr>
+                    <td><strong>Special Attack</strong></td>
+                    <td>${pokemon.stats.special_attack}</td>
+                </tr>
+                <tr>
+                    <td><strong>Special Defense</strong></td>
+                    <td>${pokemon.stats.special_defense}</td>
+                </tr>
+            </table>
                 </div>
                 <div class="tab-pane fade" id="evolutions" role="tabpanel" aria-labelledby="evolutions-tab">
                     <p>Evolution information goes here.</p>

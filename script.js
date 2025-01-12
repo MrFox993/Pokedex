@@ -79,6 +79,8 @@ function formatPokemonData(fetchedPokemon) {
       types: pokemon.details.types.map((type) => type.type.name),
       image_default: pokemon.details.sprites.other["official-artwork"].front_default,
       image_shiny: pokemon.details.sprites.other["official-artwork"].front_shiny,
+      species_url: pokemon.details.species.url,
+      stats: {hp: pokemon.details.stats[0].base_stat, attack: pokemon.details.stats[1].base_stat, defense: pokemon.details.stats[2].base_stat, special_attack: pokemon.details.stats[3].base_stat, special_defense: pokemon.details.stats[4].base_stat, speed: pokemon.details.stats[5].base_stat},
     };
   });
 }
