@@ -52,12 +52,50 @@ async function fetchPokemonData() {
   });
 }
 
+async function fetchSpeciesPokemonData() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      for (let pokemonIndex = 0; pokemonIndex < fetchedPokemon.length; pokemonIndex++) {
+        let response = await fetch(`${fetchedPokemon[pokemonIndex].details.species.url}`);
+        let responseJson = await response.json();
+        fetchedPokemon[pokemonIndex] = {
+          ...fetchedPokemon[pokemonIndex],
+          species: responseJson,
+        };
+      }
+      resolve("data successfully fetched");
+    } catch (error) {
+      reject(`Error fetching Pokémon data: ${error}`);
+    }
+  });
+}
+
+async function fetchEvolutionPokemonData() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      for (let pokemonIndex = 0; pokemonIndex < fetchedPokemon.length; pokemonIndex++) {
+        let response = await fetch(`${fetchedPokemon[pokemonIndex].species.evolution_chain.url}`);
+        let responseJson = await response.json();
+        fetchedPokemon[pokemonIndex] = {
+          ...fetchedPokemon[pokemonIndex],
+          evolution: responseJson,
+        };
+      }
+      resolve("data successfully fetched");
+    } catch (error) {
+      reject(`Error fetching Pokémon data: ${error}`);
+    }
+  });
+}
+
 async function storeFetchedData() {
   try {
     showLoadingSpinner();
     let fetchedData = await fetchFirstData();
     fetchedPokemon = fetchedData;
     await fetchPokemonData();
+    await fetchSpeciesPokemonData();
+    await fetchEvolutionPokemonData();
     formattedPokemon = formatPokemonData(fetchedPokemon);
     allPokemon.push(...formattedPokemon);
     filterPokemonList();
@@ -81,6 +119,7 @@ function formatPokemonData(fetchedPokemon) {
       image_shiny: pokemon.details.sprites.other["official-artwork"].front_shiny,
       species_url: pokemon.details.species.url,
       stats: {hp: pokemon.details.stats[0].base_stat, attack: pokemon.details.stats[1].base_stat, defense: pokemon.details.stats[2].base_stat, special_attack: pokemon.details.stats[3].base_stat, special_defense: pokemon.details.stats[4].base_stat, speed: pokemon.details.stats[5].base_stat},
+      species_flavor_text: pokemon.species.flavor_text_entries[0].flavor_text,
     };
   });
 }
