@@ -15,3 +15,7 @@
 .modal-footer {
     background-color: rgb(11,56,72) !important;
 }
+
+.max-w-480 {
+    max-width: 480px;
+}

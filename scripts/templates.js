@@ -92,7 +92,8 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                 </li>
                 </ul>
                 <div class="tab-content mt-3">
-                <div class="tab-pane fade show active" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <div class="tab-pane fade show active max-w-480" id="about" role="tabpanel" aria-labelledby="about-tab">
+                    <p class=""><strong>${pokemon.species_flavor_text}</strong></p>
                     <table>
                         <tr>
                             <td><strong>Height</strong></td>
@@ -135,7 +136,7 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
             </table>
                 </div>
                 <div class="tab-pane fade" id="evolutions" role="tabpanel" aria-labelledby="evolutions-tab">
-                    <p>Evolution information goes here.</p>
+                    <p>No available Evolutions.</p>
                 </div>
             </div>
             </div>

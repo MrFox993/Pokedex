@@ -11,6 +11,10 @@
     filter: invert(1) !important;
 }
 
+th, td {
+    padding: 8px;
+}
+
 @media (max-width: 425px) {
     .col-6 {
         width: 75% !important;
