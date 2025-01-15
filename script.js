@@ -45,6 +45,8 @@ async function fetchPokemonData() {
           details: responseJson,
         };
       }
+      await fetchSpeciesPokemonData();
+      await fetchEvolutionPokemonData();
       resolve("data successfully fetched");
     } catch (error) {
       reject(`Error fetching Pokémon data: ${error}`);
@@ -94,9 +96,6 @@ async function storeFetchedData() {
     let fetchedData = await fetchFirstData();
     fetchedPokemon = fetchedData;
     await fetchPokemonData();
-    await fetchSpeciesPokemonData();
-    await fetchEvolutionPokemonData();
-    await fetchEvolutionPokemonData();
     formattedPokemon = formatPokemonData(fetchedPokemon);
     allPokemon.push(...formattedPokemon);
     filterPokemonList();
@@ -134,6 +133,7 @@ function formatPokemonData(fetchedPokemon) {
         weight: (pokemon.details.weight / 10).toFixed(1)
       },
       species_flavor_text: englishFlavorText,
+      evolution: pokemon.evolution,
     };
   });
 }
@@ -233,7 +233,7 @@ function renderFilteredPokemons() {
 }
 
 async function loadPokemonInfoCard(pokemonIndex) {
-  let pokemon = filteredPokemon[pokemonIndex];
+  let pokemon = allPokemon[pokemonIndex];
   let modalHTML = getModalContentHTMLTemplate(pokemon, pokemonIndex);
 
   document.body.insertAdjacentHTML("beforeend", modalHTML);
@@ -244,7 +244,7 @@ async function loadPokemonInfoCard(pokemonIndex) {
   modalInstance.show();
   console.log("pokemon:" , pokemon  );
 
-  let evolutionData = fetchedPokemon[pokemonIndex].evolution;
+  let evolutionData = allPokemon[pokemonIndex].evolution;
 
   try {
     const evolutionChainHTML = generateEvolutionChainHTML(evolutionData);
