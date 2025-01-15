@@ -247,7 +247,6 @@ async function loadPokemonInfoCard(pokemonIndex) {
   let evolutionData = allPokemon[pokemonIndex].evolution;
 
   try {
-    const evolutionChainHTML = generateEvolutionChainHTML(evolutionData);
     if (evolutionData) {
       const evolutionChainHTML = generateEvolutionChainHTML(evolutionData);
       document.getElementById("evolution-chain").innerHTML = evolutionChainHTML;
