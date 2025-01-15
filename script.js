@@ -6,6 +6,7 @@ let fetchedPokemon = [];
 let formattedPokemon = [];
 let allPokemon = [];
 let filteredPokemon = [];
+let isFilterActive = false;
 
 async function init() {
   renderLoadingSpinner();
@@ -204,6 +205,8 @@ function filterPokemonList() {
     filteredPokemon = [...allPokemon];
   }
 
+  isFilterActive = filteredPokemon.length !== allPokemon.length;
+
   if (filteredPokemon.length === 0) {
     renderNoResultsFound();
   } else {
@@ -294,20 +297,27 @@ function updateNavigationButtons(index) {
   let prevButton = document.getElementById("prevButton");
   let nextButton = document.getElementById("nextButton");
 
-  if (index <= 0) {
+  if (isFilterActive) {
     prevButton.disabled = true;
     prevButton.classList.add("disabled");
-  } else {
-    prevButton.disabled = false;
-    prevButton.classList.remove("disabled");
-  }
-
-  if (index >= filteredPokemon.length - 1) {
     nextButton.disabled = true;
     nextButton.classList.add("disabled");
   } else {
-    nextButton.disabled = false;
-    nextButton.classList.remove("disabled");
+    if (index <= 0) {
+      prevButton.disabled = true;
+      prevButton.classList.add("disabled");
+    } else {
+      prevButton.disabled = false;
+      prevButton.classList.remove("disabled");
+    }
+  
+    if (index >= filteredPokemon.length - 1) {
+      nextButton.disabled = true;
+      nextButton.classList.add("disabled");
+    } else {
+      nextButton.disabled = false;
+      nextButton.classList.remove("disabled");
+    }
   }
 }
 
