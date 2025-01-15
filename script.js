@@ -109,6 +109,10 @@ async function storeFetchedData() {
 
 function formatPokemonData(fetchedPokemon) {
   return fetchedPokemon.map((pokemon) => {
+    const englishFlavorText = pokemon.species.flavor_text_entries.find(
+      (entry) => entry.language.name === "en"
+    ).flavor_text;
+
     return {
       name: pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1),
       id: pokemon.url.split("/").filter(Boolean).pop(),
@@ -128,7 +132,7 @@ function formatPokemonData(fetchedPokemon) {
         height: (pokemon.details.height / 10).toFixed(1),
         weight: (pokemon.details.weight / 10).toFixed(1)
       },
-      species_flavor_text: pokemon.species.flavor_text_entries[0].flavor_text,
+      species_flavor_text: englishFlavorText,
     };
   });
 }
