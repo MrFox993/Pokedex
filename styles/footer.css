@@ -1,0 +1,16 @@
+footer {
+    width: -webkit-fill-available;
+    height: 5vh;
+    background-color: rgb(6, 36, 46);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-content {
+    max-width: 1920px;
+    width: -webkit-fill-available;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
