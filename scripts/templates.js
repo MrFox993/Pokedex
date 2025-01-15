@@ -55,7 +55,7 @@ function getNoResultsHTMLTemplate() {
 }
 
 function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
-    let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
+  let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
   return `
     <div class="modal fade" id="pokemonInfoModal" tabindex="-1" aria-labelledby="pokemonInfoModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -67,12 +67,12 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
           <div class="modal-body p-0">
             <div class="d-flex flex-column align-items-center ${pokemon.types[0]}">
               <div class="d-flex align-items-center">
-                <button class="btn btn-secondary me-3" onclick="navigatePokemon(${pokemonIndex - 1})">
-                  <i class="bi bi-arrow-left-circle"></i>
+                <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i>
                 </button>
                 <img src="${pokemon.image_shiny}" alt="${pokemon.name}" class="pokemon-image img-fluid" />
-                <button class="btn btn-secondary ms-3" onclick="navigatePokemon(${pokemonIndex + 1})">
-                  <i class="bi bi-arrow-right-circle"></i>
+                <button type="button" class="btn btn-secondary">
+                    <i class="fas fa-arrow-right"></i>
                 </button>
               </div>
             </div>
@@ -105,9 +105,7 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                         </tr>
                         <tr>
                             <td><strong>Abilities</strong></td>
-                            <td>${pokemon.details.abilities
-                                .map((ability) => ability.ability.name)
-                                .join(", ")}</td>
+                            <td>${pokemon.details.abilities.map((ability) => ability.ability.name).join(", ")}</td>
                         </tr>
                     </table>
                 </div>
@@ -118,7 +116,9 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                     <td>${pokemon.stats.hp}</td>
                     <td>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.hp}%" aria-valuenow="${pokemon.stats.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: ${
+                              pokemon.stats.hp
+                            }%" aria-valuenow="${pokemon.stats.hp}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </td>
                 </tr>
@@ -127,7 +127,9 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                     <td>${pokemon.stats.attack}</td>
                     <td>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.attack}%" aria-valuenow="${pokemon.stats.attack}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: ${
+                              pokemon.stats.attack
+                            }%" aria-valuenow="${pokemon.stats.attack}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </td>
                 </tr>
@@ -136,7 +138,9 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                     <td>${pokemon.stats.defense}</td>
                     <td>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.defense}%" aria-valuenow="${pokemon.stats.defense}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: ${
+                              pokemon.stats.defense
+                            }%" aria-valuenow="${pokemon.stats.defense}" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </td>
                 </tr>
@@ -145,7 +149,11 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                     <td>${pokemon.stats.special_attack}</td>
                     <td>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.special_attack}%" aria-valuenow="${pokemon.stats.special_attack}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: ${
+                              pokemon.stats.special_attack
+                            }%" aria-valuenow="${
+    pokemon.stats.special_attack
+  }" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </td>
                 </tr>
@@ -154,7 +162,11 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                     <td>${pokemon.stats.special_defense}</td>
                     <td>
                         <div class="progress">
-                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.special_defense}%" aria-valuenow="${pokemon.stats.special_defense}" aria-valuemin="0" aria-valuemax="100"></div>
+                            <div class="progress-bar" role="progressbar" style="width: ${
+                              pokemon.stats.special_defense
+                            }%" aria-valuenow="${
+    pokemon.stats.special_defense
+  }" aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
                     </td>
                 </tr>
