@@ -251,3 +251,21 @@ function loadPokemonInfoCard(pokemonIndex) {
     }, 500);
   });
 }
+
+function navigatePokemon(index) {
+  if (index < 0 || index >= filteredPokemon.length) {
+    return;
+  }
+
+  let currentModalElement = document.getElementById("pokemonInfoModal");
+  if (currentModalElement) {
+    let currentModalInstance = bootstrap.Modal.getInstance(currentModalElement);
+    currentModalInstance.hide();
+    currentModalElement.addEventListener("hidden.bs.modal", () => {
+      currentModalElement.remove();
+      loadPokemonInfoCard(index);
+    });
+  } else {
+    loadPokemonInfoCard(index);
+  }
+}

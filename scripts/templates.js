@@ -67,11 +67,11 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
           <div class="modal-body p-0">
             <div class="d-flex flex-column align-items-center ${pokemon.types[0]}">
               <div class="d-flex align-items-center">
-                <button type="button" class="btn btn-secondary">
+                <button type="button" class="btn btn-secondary" onclick="navigatePokemon(${pokemonIndex - 1})">
                     <i class="fas fa-arrow-left"></i>
                 </button>
                 <img src="${pokemon.image_shiny}" alt="${pokemon.name}" class="pokemon-image img-fluid" />
-                <button type="button" class="btn btn-secondary">
+                <button type="button" class="btn btn-secondary" onclick="navigatePokemon(${pokemonIndex + 1})">
                     <i class="fas fa-arrow-right"></i>
                 </button>
               </div>
