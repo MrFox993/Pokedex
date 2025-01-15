@@ -53,3 +53,11 @@
   .modal.flip-out {
     animation: flipOut 0.5s backwards;
   }
+
+  .nav-link {
+    color: white !important;
+  }
+
+  .nav-link.active {
+    color: black !important;
+  }
