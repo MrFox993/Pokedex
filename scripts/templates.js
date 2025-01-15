@@ -97,11 +97,11 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                     <table>
                         <tr>
                             <td><strong>Height</strong></td>
-                            <td>${pokemon.details.height} m</td>
+                            <td>${pokemon.stats.height} m</td>
                         </tr>
                         <tr>
                             <td><strong>Weight</strong></td>
-                            <td>${pokemon.details.weight} kg</td>
+                            <td>${pokemon.stats.weight} kg</td>
                         </tr>
                         <tr>
                             <td><strong>Abilities</strong></td>

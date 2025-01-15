@@ -118,7 +118,16 @@ function formatPokemonData(fetchedPokemon) {
       image_default: pokemon.details.sprites.other["official-artwork"].front_default,
       image_shiny: pokemon.details.sprites.other["official-artwork"].front_shiny,
       species_url: pokemon.details.species.url,
-      stats: {hp: pokemon.details.stats[0].base_stat, attack: pokemon.details.stats[1].base_stat, defense: pokemon.details.stats[2].base_stat, special_attack: pokemon.details.stats[3].base_stat, special_defense: pokemon.details.stats[4].base_stat, speed: pokemon.details.stats[5].base_stat},
+      stats: {
+        hp: pokemon.details.stats[0].base_stat,
+        attack: pokemon.details.stats[1].base_stat,
+        defense: pokemon.details.stats[2].base_stat,
+        special_attack: pokemon.details.stats[3].base_stat,
+        special_defense: pokemon.details.stats[4].base_stat,
+        speed: pokemon.details.stats[5].base_stat,
+        height: (pokemon.details.height / 10).toFixed(1),
+        weight: (pokemon.details.weight / 10).toFixed(1)
+      },
       species_flavor_text: pokemon.species.flavor_text_entries[0].flavor_text,
     };
   });
@@ -140,8 +149,8 @@ async function renderAllPokemonTypes() {
     let pokemonType = filteredPokemon[pokemonIndex].types;
     cardTypesRef.innerHTML = "";
     for (let typeIndex = 0; typeIndex < pokemonType.length; typeIndex++) {
-      if (pokemonType[typeIndex]){
-      cardTypesRef.innerHTML += getTypeHTMLTemplate(filteredPokemon[pokemonIndex], typeIndex);
+      if (pokemonType[typeIndex]) {
+        cardTypesRef.innerHTML += getTypeHTMLTemplate(filteredPokemon[pokemonIndex], typeIndex);
       }
     }
   }
@@ -172,21 +181,21 @@ function hideLoadingSpinner() {
 
 function filterPokemonList() {
   if (!allPokemon) {
-    console.error('allPokemon is undefined');
+    console.error("allPokemon is undefined");
     return [];
   }
 
   let searchInput = document.getElementById("pokemon-search").value.toLowerCase();
 
   if (searchInput.length >= 3 || !isNaN(searchInput)) {
-    filteredPokemon = allPokemon.filter(pokemon => {
+    filteredPokemon = allPokemon.filter((pokemon) => {
       const nameMatch = pokemon.name.toLowerCase().includes(searchInput);
       const idMatch = !isNaN(searchInput) && pokemon.id.toString().includes(searchInput);
-      const typeMatch = pokemon.types.some(type => type.toLowerCase().includes(searchInput));
+      const typeMatch = pokemon.types.some((type) => type.toLowerCase().includes(searchInput));
 
       return nameMatch || idMatch || typeMatch;
     });
-    } else {
+  } else {
     filteredPokemon = [...allPokemon];
   }
 
@@ -206,7 +215,7 @@ function renderFilteredPokemons() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
   if (!filteredPokemon || filteredPokemon.length === 0) {
-    console.error('filteredPokemon is undefined or empty');
+    console.error("filteredPokemon is undefined or empty");
     renderNoResultsFound();
     return;
   }
@@ -226,13 +235,13 @@ function loadPokemonInfoCard(pokemonIndex) {
   document.body.insertAdjacentHTML("beforeend", modalHTML);
 
   let modalElement = document.getElementById("pokemonInfoModal");
-  modalElement.classList.add('flip-in');
+  modalElement.classList.add("flip-in");
   let modalInstance = new bootstrap.Modal(modalElement);
   modalInstance.show();
 
   modalInstance._element.addEventListener("hidden.bs.modal", () => {
-    modalElement.classList.remove('flip-in');
-    modalElement.classList.add('flip-out');
+    modalElement.classList.remove("flip-in");
+    modalElement.classList.add("flip-out");
     setTimeout(() => {
       modalElement.remove();
     }, 500);
