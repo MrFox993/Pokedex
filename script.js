@@ -226,10 +226,15 @@ function loadPokemonInfoCard(pokemonIndex) {
   document.body.insertAdjacentHTML("beforeend", modalHTML);
 
   let modalElement = document.getElementById("pokemonInfoModal");
+  modalElement.classList.add('flip-in');
   let modalInstance = new bootstrap.Modal(modalElement);
   modalInstance.show();
 
   modalInstance._element.addEventListener("hidden.bs.modal", () => {
-    modalElement.remove();
+    modalElement.classList.remove('flip-in');
+    modalElement.classList.add('flip-out');
+    setTimeout(() => {
+      modalElement.remove();
+    }, 500);
   });
 }
