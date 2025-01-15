@@ -19,3 +19,7 @@
 .max-w-480 {
     max-width: 480px;
 }
+
+.progress {
+    width: 200px;
+}

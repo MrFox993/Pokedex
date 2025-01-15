@@ -116,22 +116,47 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
                 <tr>
                     <td><strong>HP</strong></td>
                     <td>${pokemon.stats.hp}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.hp}%" aria-valuenow="${pokemon.stats.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>Attack</strong></td>
                     <td>${pokemon.stats.attack}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.attack}%" aria-valuenow="${pokemon.stats.attack}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>Defense</strong></td>
                     <td>${pokemon.stats.defense}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.defense}%" aria-valuenow="${pokemon.stats.defense}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>Special Attack</strong></td>
                     <td>${pokemon.stats.special_attack}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.special_attack}%" aria-valuenow="${pokemon.stats.special_attack}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
                 </tr>
                 <tr>
                     <td><strong>Special Defense</strong></td>
                     <td>${pokemon.stats.special_defense}</td>
+                    <td>
+                        <div class="progress">
+                            <div class="progress-bar" role="progressbar" style="width: ${pokemon.stats.special_defense}%" aria-valuenow="${pokemon.stats.special_defense}" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </td>
                 </tr>
             </table>
                 </div>
