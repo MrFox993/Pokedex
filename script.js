@@ -250,6 +250,7 @@ function loadPokemonInfoCard(pokemonIndex) {
       modalElement.remove();
     }, 500);
   });
+  updateNavigationButtons(pokemonIndex);
 }
 
 function navigatePokemon(index) {
@@ -264,8 +265,31 @@ function navigatePokemon(index) {
     currentModalElement.addEventListener("hidden.bs.modal", () => {
       currentModalElement.remove();
       loadPokemonInfoCard(index);
+      updateNavigationButtons(index);
     });
   } else {
     loadPokemonInfoCard(index);
+    updateNavigationButtons(index);
+  }
+}
+
+function updateNavigationButtons(index) {
+  let prevButton = document.getElementById("prevButton");
+  let nextButton = document.getElementById("nextButton");
+
+  if (index <= 0) {
+    prevButton.disabled = true;
+    prevButton.classList.add("disabled");
+  } else {
+    prevButton.disabled = false;
+    prevButton.classList.remove("disabled");
+  }
+
+  if (index >= filteredPokemon.length - 1) {
+    nextButton.disabled = true;
+    nextButton.classList.add("disabled");
+  } else {
+    nextButton.disabled = false;
+    nextButton.classList.remove("disabled");
   }
 }

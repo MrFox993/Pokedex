@@ -61,3 +61,12 @@
   .nav-link.active {
     color: black !important;
   }
+
+  button.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+  
+  button.disabled:hover {
+    cursor: not-allowed;
+  }
