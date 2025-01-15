@@ -173,7 +173,9 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
             </table>
                 </div>
                 <div class="tab-pane fade" id="evolutions" role="tabpanel" aria-labelledby="evolutions-tab">
-                    <p>No available Evolutions.</p>
+                    <div id="evolution-chain" class="d-flex justify-content-center align-items-center">
+                        <p>No available Evolutions.</p>
+                    </div>
                 </div>
             </div>
             </div>

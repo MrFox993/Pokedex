@@ -96,6 +96,7 @@ async function storeFetchedData() {
     await fetchPokemonData();
     await fetchSpeciesPokemonData();
     await fetchEvolutionPokemonData();
+    await fetchEvolutionPokemonData();
     formattedPokemon = formatPokemonData(fetchedPokemon);
     allPokemon.push(...formattedPokemon);
     filterPokemonList();
@@ -231,9 +232,8 @@ function renderFilteredPokemons() {
   renderLoadMoreButton();
 }
 
-function loadPokemonInfoCard(pokemonIndex) {
+async function loadPokemonInfoCard(pokemonIndex) {
   let pokemon = filteredPokemon[pokemonIndex];
-  console.log("pokemon", pokemon);
   let modalHTML = getModalContentHTMLTemplate(pokemon, pokemonIndex);
 
   document.body.insertAdjacentHTML("beforeend", modalHTML);
@@ -242,6 +242,22 @@ function loadPokemonInfoCard(pokemonIndex) {
   modalElement.classList.add("flip-in");
   let modalInstance = new bootstrap.Modal(modalElement);
   modalInstance.show();
+  console.log("pokemon:" , pokemon  );
+
+  let evolutionData = fetchedPokemon[pokemonIndex].evolution;
+
+  try {
+    const evolutionChainHTML = generateEvolutionChainHTML(evolutionData);
+    if (evolutionData) {
+      const evolutionChainHTML = generateEvolutionChainHTML(evolutionData);
+      document.getElementById("evolution-chain").innerHTML = evolutionChainHTML;
+    } else {
+      document.getElementById("evolution-chain").innerHTML = `<p class="text-center text-muted">No evolution data available.</p>`;
+    }
+  } catch (error) {
+    console.error("Error fetching evolution chain:", error);
+    document.getElementById("evolution-chain").innerHTML = `<p class="text-center text-danger">Failed to load evolution data.</p>`;
+  }
 
   modalInstance._element.addEventListener("hidden.bs.modal", () => {
     modalElement.classList.remove("flip-in");
@@ -250,8 +266,10 @@ function loadPokemonInfoCard(pokemonIndex) {
       modalElement.remove();
     }, 500);
   });
+
   updateNavigationButtons(pokemonIndex);
 }
+
 
 function navigatePokemon(index) {
   if (index < 0 || index >= filteredPokemon.length) {
@@ -292,4 +310,31 @@ function updateNavigationButtons(index) {
     nextButton.disabled = false;
     nextButton.classList.remove("disabled");
   }
+}
+
+function generateEvolutionChainHTML(evolutionData) {
+  let evolutionHTML = '';
+
+  function traverseChain(chainNode) {
+    if (!chainNode) return;
+
+    const speciesName = chainNode.species.name;
+    const speciesId = chainNode.species.url.split("/").slice(-2, -1)[0];
+    const speciesImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${speciesId}.png`;
+
+    evolutionHTML += `
+      <div class="d-flex flex-column align-items-center mx-3">
+        <img src="${speciesImage}" alt="${speciesName}" class="evolution-image img-fluid" />
+        <p class="text-center">${speciesName}</p>
+      </div>
+    `;
+
+    if (chainNode.evolves_to && chainNode.evolves_to.length > 0) {
+      evolutionHTML += `<i class="bi bi-arrow-right-circle mx-2"></i>`;
+      chainNode.evolves_to.forEach(evolve => traverseChain(evolve));
+    }
+  }
+
+  traverseChain(evolutionData.chain);
+  return evolutionHTML;
 }
