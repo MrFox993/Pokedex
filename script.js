@@ -324,7 +324,7 @@ function removeModal(modalElement) {
 }
 
 function navigatePokemon(index) {
-  checkFilteredPokemonLength();
+  checkFilteredPokemonLength(index);
   let currentModalElement = document.getElementById("pokemonInfoModal");
   if (currentModalElement) {
     let currentModalInstance = bootstrap.Modal.getInstance(currentModalElement);
@@ -340,7 +340,7 @@ function navigatePokemon(index) {
   }
 }
 
-function checkFilteredPokemonLength() {
+function checkFilteredPokemonLength(index) {
   if (index < 0 || index >= filteredPokemon.length) {
     return;
   }
