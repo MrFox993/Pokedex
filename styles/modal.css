@@ -1,3 +1,8 @@
+.modal-content {
+  height: 60dvh;
+  background-color: rgb(11,56,72) !important;
+}
+
 .modal-header {
     display: flex;
     justify-content: space-evenly;
@@ -10,10 +15,12 @@
     justify-content: space-evenly;
     align-items: center;
     background-color: rgb(8, 50, 64) !important;
+    font-size: 2rem;
 }
 
 .modal-footer {
     background-color: rgb(11,56,72) !important;
+    font-size: 2rem;
 }
 
 .max-w-480 {

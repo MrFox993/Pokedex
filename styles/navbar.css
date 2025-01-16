@@ -119,6 +119,9 @@ nav {
         font-size: 12px;
         height: 2.5rem;
     }
+    .p-0 {
+        padding: 12px !important;
+    }
 }
 
 @media (max-width: 425px) {

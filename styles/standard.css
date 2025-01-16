@@ -23,3 +23,7 @@ header{
 .d_none {
     display: none !important;
 }
+
+.m-width-1920 {
+    max-width: 1920px !important;
+}
