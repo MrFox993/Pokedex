@@ -78,12 +78,27 @@ button.disabled:hover {
   cursor: not-allowed;
 }
 
-@media (max-width: 1920px) {
+@media (min-width: 1921px) {
   .modal-footer {
     font-size: 1.5rem;
   }
   .modal-types {
-    font-size: 1.5rem;
+    font-size: 2rem;
+  }
+  .modal-body img {
+    width: 400px;
+  }
+  #evolution-chain img {
+    width: 275px;
+  }
+}
+
+@media (max-width: 1920px) {
+  .modal-footer {
+    font-size: 1.25rem;
+  }
+  .modal-types {
+    font-size: 1.25rem;
   }
   .modal-body img {
     width: 350px;
