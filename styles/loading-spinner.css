@@ -23,6 +23,10 @@
   transform-origin: center center;
 }
 
+.spinner img {
+  width: -webkit-fill-available;
+}
+
 #loading-overlay {
   position: fixed;
   top: 0;
