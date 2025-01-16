@@ -14,3 +14,9 @@ footer {
     justify-content: space-between;
     align-items: center;
 }
+
+@media (max-width: 1920px) {
+    .footer-content {
+        justify-content: space-evenly;
+    }
+}

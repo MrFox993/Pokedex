@@ -1,5 +1,5 @@
 .modal-content {
-  height: 60dvh;
+  height: 60vh;
   background-color: rgb(11,56,72) !important;
 }
 
@@ -77,3 +77,18 @@
   button.disabled:hover {
     cursor: not-allowed;
   }
+
+  @media (max-width: 1920px) {
+    .modal-footer {
+      font-size: 1.5rem;
+    }
+    .modal-types {
+      font-size: 1.5rem;
+    }
+    .modal-header h3,h5 {
+      font-size: 2rem !important;
+    }
+    .modal-content {
+      height: 75vh;
+    }
+}
