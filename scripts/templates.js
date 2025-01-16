@@ -187,3 +187,12 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
     </div>
   `;
 }
+
+function getEvolutionChainHTMLTemplate(speciesImage, speciesName) {
+    return `
+    <div class="d-flex flex-column align-items-center mx-3">
+      <img src="${speciesImage}" alt="${speciesName}" class="evolution-image img-fluid" />
+      <p class="text-center">${speciesName}</p>
+    </div>
+  `;
+}

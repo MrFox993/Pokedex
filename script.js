@@ -282,11 +282,9 @@ async function loadPokemonInfoCard(pokemonIndex) {
   document.body.insertAdjacentHTML("beforeend", modalHTML);
 
   let modalElement = document.getElementById("pokemonInfoModal");
-  modalElement.classList.add("flip-in");
-  let modalInstance = new bootstrap.Modal(modalElement);
-  modalInstance.show();
+  showModal(modalElement);
 
-  let evolutionData = allPokemon[pokemonIndex].evolution;
+  let evolutionData = pokemon.evolution;
 
   try {
     if (evolutionData) {
@@ -300,17 +298,30 @@ async function loadPokemonInfoCard(pokemonIndex) {
     document.getElementById("evolution-chain").innerHTML = `<p class="text-center text-danger">Failed to load evolution data.</p>`;
   }
 
-  modalInstance._element.addEventListener("hidden.bs.modal", () => {
-    modalElement.classList.remove("flip-in");
-    modalElement.classList.add("flip-out");
-    setTimeout(() => {
-      modalElement.remove();
-    }, 500);
-  });
+  handleModalClose(modalElement);
 
   updateNavigationButtons(pokemonIndex);
 }
 
+function showModal(modalElement) {
+  modalElement.classList.add("flip-in");
+  let modalInstance = new bootstrap.Modal(modalElement);
+  modalInstance.show();
+}
+
+function handleModalClose(modalElement) {
+  modalElement.addEventListener("hidden.bs.modal", () => {
+    modalElement.classList.remove("flip-in");
+    modalElement.classList.add("flip-out");
+    setTimeout(() => {
+      removeModal(modalElement);
+    }, 500);
+  });
+}
+
+function removeModal(modalElement) {
+  modalElement.remove();
+}
 
 function navigatePokemon(index) {
   checkFilteredPokemonLength();
@@ -368,28 +379,31 @@ function checkPokemonIndexOnEndList(index) {
 }
 
 function generateEvolutionChainHTML(evolutionData) {
-  let evolutionHTML = '';
+  let evolutionHTML = traverseChain(evolutionData.chain);
+  return evolutionHTML;
+}
 
-  function traverseChain(chainNode) {
-    if (!chainNode) return;
+function traverseChain(chainNode) {
+  if (!chainNode) return '';
 
-    const speciesName = chainNode.species.name;
-    const speciesId = chainNode.species.url.split("/").slice(-2, -1)[0];
-    const speciesImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${speciesId}.png`;
+  const speciesName = chainNode.species.name;
+  const speciesId = chainNode.species.url.split("/").slice(-2, -1)[0];
+  const speciesImage = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${speciesId}.png`;
 
-    evolutionHTML += `
-      <div class="d-flex flex-column align-items-center mx-3">
-        <img src="${speciesImage}" alt="${speciesName}" class="evolution-image img-fluid" />
-        <p class="text-center">${speciesName}</p>
-      </div>
-    `;
+  let evolutionHTML = getEvolutionChainHTMLTemplate(speciesImage, speciesName);
 
-    if (chainNode.evolves_to && chainNode.evolves_to.length > 0) {
-      evolutionHTML += `<i class="bi bi-arrow-right-circle mx-2"></i>`;
-      chainNode.evolves_to.forEach(evolve => traverseChain(evolve));
-    }
-  }
+  evolutionHTML += generateEvolvesToHTML(chainNode.evolves_to);
 
-  traverseChain(evolutionData.chain);
+  return evolutionHTML;
+}
+
+function generateEvolvesToHTML(evolvesToArray) {
+  if (!evolvesToArray || evolvesToArray.length === 0) return '';
+
+  let evolutionHTML = `<i class="bi bi-arrow-right-circle mx-2"></i>`;
+  evolvesToArray.forEach(evolve => {
+    evolutionHTML += traverseChain(evolve);
+  });
+
   return evolutionHTML;
 }
