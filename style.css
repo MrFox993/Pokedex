@@ -34,7 +34,7 @@
 }
 
 h3,h5 {
-    font-size: 3.5rem !important;
+    font-size: 2.5rem !important;
 }
 
 .card {
@@ -92,7 +92,7 @@ h1 {
 
 @media (max-width: 1920px) {
     h3, h5 {
-        font-size: 2.5rem !important;
+        font-size: 2rem !important;
     }
 }
 
@@ -106,7 +106,7 @@ h1 {
     }
 
     h3, h5 {
-        font-size: 2rem !important;
+        font-size: 1.5rem !important;
     }
 }
 

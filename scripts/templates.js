@@ -1,6 +1,4 @@
-function getCardsHTMLTemplate(pokemon) {
-  let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
-  let pokemonIndex = pokemon.id - 1;
+function getCardsHTMLTemplate(pokemon, pokemonId, pokemonIndex) {
   return `
     <div class="card" onclick="loadPokemonInfoCard(${pokemonIndex})">
         <div class="card-body flex column">
@@ -59,8 +57,7 @@ function getNoResultsHTMLTemplate() {
   `;
 }
 
-function getModalContentHTMLTemplate(pokemon, pokemonIndex) {
-  let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
+function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
   return `
     <div class="modal fade" id="pokemonInfoModal" tabindex="-1" aria-labelledby="pokemonInfoModalLabel">
       <div class="modal-dialog modal-dialog-centered modal-lg">

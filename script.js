@@ -14,15 +14,7 @@ async function init() {
 }
 
 async function fetchFirstData() {
-  if (fetchedPokemon.length != 0) {
-    if (offset + limit > maxLimit) {
-      limit = maxLimit - offset;
-    }
-    offset += limit;
-    if (offset >= maxLimit) {
-      document.getElementById("load-button").disabled = true;
-    }
-  }
+  checkFetchedPokemonLength();
   let response = await fetch(`${BASE_URL}?limit=${limit}&offset=${offset}`);
   let responseJson = await response.json();
   let fetchResults = await responseJson.results;
@@ -35,12 +27,21 @@ async function fetchFirstData() {
   });
 }
 
+function checkFetchedPokemonLength() {
+  if (fetchedPokemon.length != 0) {
+    if (offset + limit > maxLimit) {
+      limit = maxLimit - offset;
+    }
+    offset += limit;
+    if (offset >= maxLimit) {
+      document.getElementById("load-button").disabled = true;
+    }
+  }
+}
+
 async function fetchPokemonData() {
   return new Promise(async (resolve, reject) => {
     try {
-      let progressBarFill = document.getElementById('progress-bar-fill');
-      let totalPokemon = fetchedPokemon.length;
-
       for (let pokemonIndex = 0; pokemonIndex < fetchedPokemon.length; pokemonIndex++) {
         let response = await fetch(`${fetchedPokemon[pokemonIndex].url}`);
         let responseJson = await response.json();
@@ -48,9 +49,7 @@ async function fetchPokemonData() {
           ...fetchedPokemon[pokemonIndex],
           details: responseJson,
         };
-
-        let progress = ((pokemonIndex + 1) / totalPokemon) * 100;
-        progressBarFill.style.width = `${progress}%`;
+        fillProgressBar(pokemonIndex);
       }
       await fetchSpeciesPokemonData();
       await fetchEvolutionPokemonData();
@@ -59,6 +58,13 @@ async function fetchPokemonData() {
       reject(`Error fetching Pokémon data: ${error}`);
     }
   });
+}
+
+function fillProgressBar(pokemonIndex) {
+  let progressBarFill = document.getElementById('progress-bar-fill');
+  let totalPokemon = fetchedPokemon.length;
+  let progress = ((pokemonIndex + 1) / totalPokemon) * 100;
+  progressBarFill.style.width = `${progress}%`;
 }
 
 async function fetchSpeciesPokemonData() {
@@ -149,7 +155,11 @@ function renderAllPokemon() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
   for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
-    contentRef.innerHTML += getCardsHTMLTemplate(filteredPokemon[pokemonIndex]);
+    let pokemon = filteredPokemon[pokemonIndex];
+    let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
+    let pokemonIndex = pokemon.id - 1;
+  
+    contentRef.innerHTML += getCardsHTMLTemplate(pokemon, pokemonId, pokemonIndex);
   }
   renderAllPokemonTypes();
   renderLoadMoreButton();
@@ -194,12 +204,9 @@ function hideLoadingSpinner() {
 }
 
 function filterPokemonList() {
-  if (!allPokemon) {
-    console.error("allPokemon is undefined");
-    return [];
-  }
-
   let searchInput = document.getElementById("pokemon-search").value.toLowerCase();
+
+  checkAllPokemonList();
 
   if (searchInput.length >= 3 || !isNaN(searchInput)) {
     filteredPokemon = allPokemon.filter((pokemon) => {
@@ -222,6 +229,13 @@ function filterPokemonList() {
   }
 }
 
+function checkAllPokemonList() {
+  if (!allPokemon) {
+    console.error("allPokemon is undefined");
+    return [];
+  }
+}
+
 function renderNoResultsFound() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = getNoResultsHTMLTemplate();
@@ -230,22 +244,29 @@ function renderNoResultsFound() {
 function renderFilteredPokemons() {
   let contentRef = document.getElementById("content");
   contentRef.innerHTML = "";
-  if (!filteredPokemon || filteredPokemon.length === 0) {
-    console.error("filteredPokemon is undefined or empty");
-    renderNoResultsFound();
-    return;
-  }
+  checkFilteredPokemonList();
   for (let pokemonIndex = 0; pokemonIndex < filteredPokemon.length; pokemonIndex++) {
     let pokemon = filteredPokemon[pokemonIndex];
-    contentRef.innerHTML += getCardsHTMLTemplate(pokemon);
+    let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
+
+    contentRef.innerHTML += getCardsHTMLTemplate(pokemon, pokemonId, pokemonIndex);
   }
   renderAllPokemonTypes();
   renderLoadMoreButton();
 }
 
+function checkFilteredPokemonList() {
+  if (!filteredPokemon || filteredPokemon.length === 0) {
+    console.error("filteredPokemon is undefined or empty");
+    renderNoResultsFound();
+    return;
+  }
+}
+
 async function loadPokemonInfoCard(pokemonIndex) {
   let pokemon = allPokemon[pokemonIndex];
-  let modalHTML = getModalContentHTMLTemplate(pokemon, pokemonIndex);
+  let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
+  let modalHTML = getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId);
 
   document.body.insertAdjacentHTML("beforeend", modalHTML);
 
@@ -253,7 +274,7 @@ async function loadPokemonInfoCard(pokemonIndex) {
   modalElement.classList.add("flip-in");
   let modalInstance = new bootstrap.Modal(modalElement);
   modalInstance.show();
-  
+
   let evolutionData = allPokemon[pokemonIndex].evolution;
 
   try {
@@ -281,10 +302,7 @@ async function loadPokemonInfoCard(pokemonIndex) {
 
 
 function navigatePokemon(index) {
-  if (index < 0 || index >= filteredPokemon.length) {
-    return;
-  }
-
+  checkFilteredPokemonLength();
   let currentModalElement = document.getElementById("pokemonInfoModal");
   if (currentModalElement) {
     let currentModalInstance = bootstrap.Modal.getInstance(currentModalElement);
@@ -300,6 +318,12 @@ function navigatePokemon(index) {
   }
 }
 
+function checkFilteredPokemonLength() {
+  if (index < 0 || index >= filteredPokemon.length) {
+    return;
+  }
+}
+
 function updateNavigationButtons(index) {
   let prevButton = document.getElementById("prevButton");
   let nextButton = document.getElementById("nextButton");
@@ -310,21 +334,25 @@ function updateNavigationButtons(index) {
     nextButton.disabled = true;
     nextButton.classList.add("disabled");
   } else {
-    if (index <= 0) {
-      prevButton.disabled = true;
-      prevButton.classList.add("disabled");
-    } else {
-      prevButton.disabled = false;
-      prevButton.classList.remove("disabled");
-    }
-  
-    if (index >= filteredPokemon.length - 1) {
-      nextButton.disabled = true;
-      nextButton.classList.add("disabled");
-    } else {
-      nextButton.disabled = false;
-      nextButton.classList.remove("disabled");
-    }
+    checkPokemonIndexOnEndList(index);
+  }
+}
+
+function checkPokemonIndexOnEndList(index) {
+  if (index <= 0) {
+    prevButton.disabled = true;
+    prevButton.classList.add("disabled");
+  } else {
+    prevButton.disabled = false;
+    prevButton.classList.remove("disabled");
+  }
+
+  if (index >= filteredPokemon.length - 1) {
+    nextButton.disabled = true;
+    nextButton.classList.add("disabled");
+  } else {
+    nextButton.disabled = false;
+    nextButton.classList.remove("disabled");
   }
 }
 
