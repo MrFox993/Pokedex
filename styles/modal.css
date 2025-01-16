@@ -95,16 +95,16 @@ button.disabled:hover {
 
 @media (max-width: 1920px) {
   .modal-footer {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
   .modal-types {
-    font-size: 1.25rem;
+    font-size: 1rem;
   }
   .modal-body img {
-    width: 350px;
+    width: 250px;
   }
   #evolution-chain img {
-    width: 250px;
+    width: 150px;
   }
 }
 

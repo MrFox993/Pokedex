@@ -34,7 +34,7 @@
 }
 
 h3,h5 {
-    font-size: 2.5rem !important;
+    font-size: 3.5rem !important;
 }
 
 .card {
@@ -88,6 +88,12 @@ h1 {
 
 .no-results-footer {
     height: 96px;
+}
+
+@media (max-width: 1920px) {
+    h3, h5 {
+        font-size: 2.5rem !important;
+    }
 }
 
 @media (max-width: 1440px) {
