@@ -45,7 +45,7 @@ h3,h5 {
 .card:hover {
     box-shadow: 0 0 1rem 0.5rem rgb(73, 88, 93);
     cursor: pointer;
-    width: calc(24rem + 0.5rem);
+    width: calc(26rem + 0.5rem);
     transition: 75ms;
 }
 
@@ -95,6 +95,10 @@ h1 {
         width: 22rem;
     }
 
+    .card:hover {
+        width: calc(22rem + 0.5rem);
+    }
+
     h3, h5 {
         font-size: 2rem !important;
     }
@@ -103,6 +107,10 @@ h1 {
 @media (max-width: 1024px) {
     .card {
         width: 20rem;
+    }
+
+    .card:hover {
+        width: calc(20rem + 0.5rem);
     }
 
     h3, h5 {
@@ -115,10 +123,11 @@ h1 {
         width: 16rem;
     }
 
+    .card:hover {
+        width: calc(16rem + 0.5rem);
+    }
+
     h3, h5 {
         font-size: 1rem !important;
     }
-}
-@media (max-width: 600px) {
-
 }
