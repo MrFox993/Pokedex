@@ -253,8 +253,7 @@ async function loadPokemonInfoCard(pokemonIndex) {
   modalElement.classList.add("flip-in");
   let modalInstance = new bootstrap.Modal(modalElement);
   modalInstance.show();
-  console.log("pokemon:" , pokemon  );
-
+  
   let evolutionData = allPokemon[pokemonIndex].evolution;
 
   try {
