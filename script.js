@@ -7,6 +7,7 @@ let formattedPokemon = [];
 let allPokemon = [];
 let filteredPokemon = [];
 let isFilterActive = false;
+let fetchedEvolutionChains = {};
 
 async function init() {
   renderLoadingSpinner();
@@ -89,11 +90,16 @@ async function fetchEvolutionPokemonData() {
   return new Promise(async (resolve, reject) => {
     try {
       for (let pokemonIndex = 0; pokemonIndex < fetchedPokemon.length; pokemonIndex++) {
-        let response = await fetch(`${fetchedPokemon[pokemonIndex].species.evolution_chain.url}`);
-        let responseJson = await response.json();
-        fetchedPokemon[pokemonIndex] = {
-          ...fetchedPokemon[pokemonIndex],
-          evolution: responseJson,
+        let evolutionChainUrl = fetchedPokemon[pokemonIndex].species.evolution_chain.url;
+        let evolutionChainId = getEvolutionChainId(evolutionChainUrl);
+
+        if (fetchedEvolutionChains[evolutionChainId]) {
+          fetchedPokemon[pokemonIndex].evolution = fetchedEvolutionChains[evolutionChainId];
+        } else {
+          let response = await fetch(evolutionChainUrl);
+          let responseJson = await response.json();
+          fetchedPokemon[pokemonIndex].evolution = responseJson;
+          fetchedEvolutionChains[evolutionChainId] = responseJson;
         };
       }
       resolve("data successfully fetched");
@@ -101,6 +107,11 @@ async function fetchEvolutionPokemonData() {
       reject(`Error fetching Pokémon data: ${error}`);
     }
   });
+}
+
+function getEvolutionChainId(url) {
+  let match = url.match(/\/evolution-chain\/(\d+)\//);
+  return match ? match[1] : null;
 }
 
 async function storeFetchedData() {
