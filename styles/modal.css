@@ -1,94 +1,142 @@
 .modal-content {
-  height: 60vh;
-  background-color: rgb(11,56,72) !important;
+  background-color: rgb(11, 56, 72) !important;
 }
 
 .modal-header {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgb(8, 50, 64) !important;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgb(8, 50, 64) !important;
 }
 
 .modal-types {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: rgb(8, 50, 64) !important;
-    font-size: 2rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: rgb(8, 50, 64) !important;
+  font-size: 2rem;
 }
 
 .modal-footer {
-    background-color: rgb(11,56,72) !important;
-    font-size: 2rem;
+  background-color: rgb(11, 56, 72) !important;
+  font-size: 2rem;
+  justify-content: flex-start !important;
 }
 
 .max-w-480 {
-    max-width: 480px;
+  max-width: 480px;
 }
 
 .progress {
-    width: 200px;
+  width: 200px;
 }
 
 @keyframes flipIn {
-    from {
-      transform: rotateY(-90deg);
-      opacity: 0;
-    }
-    to {
-      transform: rotateY(0);
-      opacity: 1;
-    }
+  from {
+    transform: rotateY(-90deg);
+    opacity: 0;
   }
-  
-  @keyframes flipOut {
-    from {
-      transform: rotateY(0);
-      opacity: 1;
-    }
-    to {
-      transform: rotateY(90deg);
-      opacity: 0;
-    }
+  to {
+    transform: rotateY(0);
+    opacity: 1;
   }
-  
-  .modal.flip-in {
-    animation: flipIn 0.5s forwards;
-  }
-  
-  .modal.flip-out {
-    animation: flipOut 0.5s backwards;
-  }
+}
 
-  .nav-link {
-    color: white !important;
+@keyframes flipOut {
+  from {
+    transform: rotateY(0);
+    opacity: 1;
   }
+  to {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+}
 
-  .nav-link.active {
-    color: black !important;
-  }
+.modal.flip-in {
+  animation: flipIn 0.5s forwards;
+}
 
-  button.disabled {
-    pointer-events: none;
-    opacity: 0.5;
-  }
-  
-  button.disabled:hover {
-    cursor: not-allowed;
-  }
+.modal.flip-out {
+  animation: flipOut 0.5s backwards;
+}
 
-  @media (max-width: 1920px) {
-    .modal-footer {
-      font-size: 1.5rem;
-    }
-    .modal-types {
-      font-size: 1.5rem;
-    }
-    .modal-header h3,h5 {
-      font-size: 2rem !important;
-    }
-    .modal-content {
-      height: 75vh;
-    }
+.nav-link {
+  color: white !important;
+}
+
+.nav-link.active {
+  color: black !important;
+}
+
+button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+button.disabled:hover {
+  cursor: not-allowed;
+}
+
+@media (max-width: 1920px) {
+  .modal-footer {
+    font-size: 1.5rem;
+  }
+  .modal-types {
+    font-size: 1.5rem;
+  }
+  .modal-body img {
+    width: 350px;
+  }
+  #evolution-chain img {
+    width: 250px;
+  }
+}
+
+@media (max-width: 1440px) {
+  .modal-footer {
+    font-size: 1rem;
+  }
+  .modal-types {
+    font-size: 1rem;
+  }
+  .modal-body img {
+    width: 250px;
+  }
+  #evolution-chain img {
+    width: 150px;
+  }
+}
+
+@media (max-width: 1024px) {
+  .modal-footer {
+    font-size: .75rem;
+  }
+  .modal-types {
+    font-size: .75rem;
+  }
+  .modal-body img {
+    width: 300px;
+  }
+  #evolution-chain img {
+    width: 150px;
+  }
+}
+
+@media (max-width: 425px) {
+  .modal-footer {
+    font-size: .5rem;
+  }
+  .modal-types {
+    font-size: .5rem;
+  }
+  .modal-body img {
+    width: 150px;
+  }
+  #evolution-chain img {
+    width: 75px;
+  }
+  /* .modal-content {
+    width: 85% !important;
+  } */
 }

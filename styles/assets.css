@@ -16,8 +16,23 @@ th, td {
     padding: 8px;
 }
 
+@media (max-width: 1440px) {
+    .btn-close {
+        font-size: large;
+    }
+}
+
+@media (max-width: 768px) {
+    .btn {
+        font-size: 2rem !important;
+    } 
+}
+
 @media (max-width: 425px) {
     .col-6 {
         width: 75% !important;
+    }
+    .btn {
+        font-size: 1rem !important;
     }
 }
