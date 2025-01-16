@@ -27,8 +27,8 @@ function getLoadingSpinnerHTMLTemplate() {
         <div class="loading-spinner">
             <div class="spinner">  <img src="./assets/img/pokeball.png" alt=""></div>
         </div>
-        <div class="progress-bar">
-            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        <div class="progress-bar-spinner">
+            <div class="progress-bar-fill-spinner" id="progress-bar-fill"></div>
         </div>
     `;
 }

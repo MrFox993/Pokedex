@@ -46,7 +46,7 @@
   position: relative;
 }
 
-.progress-bar {
+.progress-bar-spinner {
   width: 50%;
   height: 10px;
   background-color: #e0e0e0;
@@ -55,7 +55,7 @@
   margin-top: 10px;
 }
 
-.progress-bar-fill {
+.progress-bar-fill-spinner {
   height: 100%;
   width: 0;
   background-color: rgb(6, 36, 46);
