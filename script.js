@@ -38,6 +38,9 @@ async function fetchFirstData() {
 async function fetchPokemonData() {
   return new Promise(async (resolve, reject) => {
     try {
+      let progressBarFill = document.getElementById('progress-bar-fill');
+      let totalPokemon = fetchedPokemon.length;
+
       for (let pokemonIndex = 0; pokemonIndex < fetchedPokemon.length; pokemonIndex++) {
         let response = await fetch(`${fetchedPokemon[pokemonIndex].url}`);
         let responseJson = await response.json();
@@ -45,6 +48,9 @@ async function fetchPokemonData() {
           ...fetchedPokemon[pokemonIndex],
           details: responseJson,
         };
+
+        let progress = ((pokemonIndex + 1) / totalPokemon) * 100;
+        progressBarFill.style.width = `${progress}%`;
       }
       await fetchSpeciesPokemonData();
       await fetchEvolutionPokemonData();
@@ -182,6 +188,8 @@ function showLoadingSpinner() {
 
 function hideLoadingSpinner() {
   let loadingSpinnerRef = document.getElementById("loading-overlay");
+  let progressBarFill = document.getElementById("progress-bar-fill");
+  progressBarFill.style.width = "0%";
   loadingSpinnerRef.classList.add("d_none");
 }
 

@@ -26,7 +26,12 @@ function getTypeHTMLTemplate(pokemon, typeIndex) {
 
 function getLoadingSpinnerHTMLTemplate() {
   return `
-  <img src="./assets/img/pokeball.png" alt="" class="spinner">
+        <div class="loading-spinner">
+            <div class="spinner">  <img src="./assets/img/pokeball.png" alt=""></div>
+        </div>
+        <div class="progress-bar">
+            <div class="progress-bar-fill" id="progress-bar-fill"></div>
+        </div>
     `;
 }
 
