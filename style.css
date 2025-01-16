@@ -6,6 +6,7 @@
     justify-content: center;
     gap: 1rem;
     max-width: 1920px;
+    margin-bottom: 50px;
 }
 .content {
     display: flex;
@@ -83,7 +84,7 @@ h1 {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 380px;
+    height: 320px;
 }
 
 .no-results-footer {
