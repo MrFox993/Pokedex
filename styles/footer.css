@@ -1,6 +1,6 @@
 footer {
     width: -webkit-fill-available;
-    height: 5vh;
+    height: 3vh;
     background-color: rgb(6, 36, 46);
     display: flex;
     align-items: center;
@@ -13,13 +13,25 @@ footer {
     max-width: 1920px;
     width: -webkit-fill-available;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
+    font-size: xx-large;
+    flex-wrap: wrap;
+    text-align: center;
 }
 
 @media (max-width: 1920px) {
     .footer-content {
-        justify-content: space-evenly;
+        font-size: x-large;
+    }
+    .footer {
+        height: 5vh;
+    }
+}
+
+@media (max-width: 1440px) {
+    .footer-content {
+        font-size: medium;
     }
 }
 
@@ -31,8 +43,6 @@ footer {
 
 @media (max-width: 700px) {
     .footer-content {
-        font-size: xx-small;
-        flex-wrap: wrap;
-        text-align: center;
+        font-size: 7px;
     }
 }

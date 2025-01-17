@@ -6,7 +6,7 @@
     justify-content: center;
     gap: 1rem;
     max-width: 1920px;
-    margin-bottom: 50px;
+    margin-bottom: 200px;
 }
 .content {
     display: flex;
@@ -30,7 +30,7 @@
 .card-header {
     display: flex;
     justify-content: space-evenly;
-    align-items: center;
+    align-items: self-end;
     background-color: rgb(8, 50, 64) !important;
 }
 
@@ -91,41 +91,38 @@ h1 {
     height: 96px;
 }
 
+@media (min-width: 1921px) {
+    h3, h5 {
+        font-size: 3rem !important;
+    }
+    .card {
+        width: 28rem;
+    }
+    .card:hover {
+        width: calc(28rem + 0.5rem);
+    }
+    .card-footer img {
+        width: 120px;
+        height: 120px;
+    }
+}
+
 @media (max-width: 1920px) {
     h3, h5 {
         font-size: 2rem !important;
     }
-}
-
-@media (max-width: 1440px) {
-    .card {
-        width: 22rem;
-    }
-
-    .card:hover {
-        width: calc(22rem + 0.5rem);
-    }
-
-    h3, h5 {
-        font-size: 1.5rem !important;
-    }
-}
-
-@media (max-width: 1024px) {
     .card {
         width: 20rem;
     }
-
     .card:hover {
         width: calc(20rem + 0.5rem);
     }
-
-    h3, h5 {
-        font-size: 1.5rem !important;
+    .main-content {
+        margin-bottom: 100px;
     }
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1440px) {
     .card {
         width: 16rem;
     }
@@ -135,6 +132,49 @@ h1 {
     }
 
     h3, h5 {
+        font-size: 1.0rem !important;
+    }
+
+    .main-content {
+        margin-bottom: 50px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .card {
+        width: 12rem;
+    }
+
+    .card:hover {
+        width: calc(12rem + 0.5rem);
+    }
+
+    .card-footer img {
+        width: 50px;
+        height: 50px;
+    }
+
+    h3, h5 {
         font-size: 1rem !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .card {
+        width: 8rem;
+    }
+
+    .card:hover {
+        width: calc(6rem + 0.5rem);
+    }
+
+    .card-footer img {
+        width: 30px;
+        height: 30px;
+    }
+
+    .card-header {
+        flex-direction: column;
+        align-items: center;
     }
 }

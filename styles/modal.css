@@ -9,6 +9,11 @@
   background-color: rgb(8, 50, 64) !important;
 }
 
+.modal-title {
+  font-size: 5rem !important;
+
+}
+
 .modal-types {
   display: flex;
   justify-content: space-evenly;
@@ -80,40 +85,50 @@ button.disabled:hover {
 
 @media (min-width: 1921px) {
   .modal-footer {
-    font-size: 1.5rem;
+    font-size: 3rem;
   }
   .modal-types {
-    font-size: 2rem;
+    font-size: 3rem;
   }
-  .modal-body img {
-    width: 400px;
+  .max-w-480 {
+    max-width: 800px;
   }
-  #evolution-chain img {
-    width: 275px;
+  .modal-lg {
+    --bs-modal-width: 1200px !important;
+  }
+  .modal-body button {
+    height: 120px;
+    width: 180px;
+  }
+  .progress {
+    width: 250px;
   }
 }
 
 @media (max-width: 1920px) {
   .modal-footer {
-    font-size: 1rem;
+    font-size: 2rem;
   }
   .modal-types {
-    font-size: 1rem;
+    font-size: 2rem;
   }
   .modal-body img {
-    width: 250px;
+    width: 350px;
   }
   #evolution-chain img {
-    width: 150px;
+    width: 200px;
   }
 }
 
 @media (max-width: 1440px) {
   .modal-footer {
-    font-size: 1rem;
+    font-size: 1.25rem;
   }
   .modal-types {
-    font-size: 1rem;
+    font-size: 1.25rem;
+  }
+  .modal-title {
+    font-size: 2rem !important;
   }
   .modal-body img {
     width: 250px;
@@ -125,25 +140,40 @@ button.disabled:hover {
 
 @media (max-width: 1024px) {
   .modal-footer {
+    font-size: 1rem;
+  }
+  .modal-types {
+    font-size: 1rem;
+  }
+  .modal-body img {
+    width: 250px;
+  }
+  #evolution-chain img {
+    width: 120px;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-footer {
     font-size: .75rem;
   }
   .modal-types {
     font-size: .75rem;
   }
   .modal-body img {
-    width: 300px;
+    width: 200px;
   }
   #evolution-chain img {
-    width: 150px;
+    width: 120px;
   }
 }
 
 @media (max-width: 425px) {
   .modal-footer {
-    font-size: .5rem;
+    font-size: .6rem;
   }
   .modal-types {
-    font-size: .5rem;
+    font-size: .6rem;
   }
   .modal-body img {
     width: 150px;
@@ -151,7 +181,7 @@ button.disabled:hover {
   #evolution-chain img {
     width: 75px;
   }
-  /* .modal-content {
-    width: 85% !important;
-  } */
+  .progress {
+    width: 100px;
+  }
 }
