@@ -305,16 +305,52 @@ async function loadPokemonInfoCard(pokemonIndex) {
 
 function showModal(modalElement) {
   modalElement.classList.add("flip-in");
-  let modalInstance = new bootstrap.Modal(modalElement);
+  let modalInstance = new bootstrap.Modal(modalElement, {
+    keyboard: true,
+    backdrop: true,
+  });
   modalInstance.show();
+  removeAriaAttributes(modalElement);
+}
+
+function removeAriaAttributes(element) {
+  const ariaAttributes = [
+    "aria-hidden",
+    "aria-labelledby",
+    "aria-describedby",
+    "aria-expanded",
+    "aria-controls",
+    "aria-live",
+    "aria-modal",
+    "aria-owns",
+    "aria-pressed",
+    "aria-selected",
+  ];
+
+  ariaAttributes.forEach(attr => element.removeAttribute(attr));
+
+  const elementsWithAria = element.querySelectorAll(
+    ariaAttributes.map(attr => `[${attr}]`).join(", ")
+  );
+  elementsWithAria.forEach(el => {
+    ariaAttributes.forEach(attr => el.removeAttribute(attr));
+  });
 }
 
 function handleModalClose(modalElement) {
   modalElement.addEventListener("hidden.bs.modal", () => {
-    modalElement.classList.remove("flip-in");
-    modalElement.classList.add("flip-out");
+    if (document.activeElement && modalElement.contains(document.activeElement)) {
+      document.activeElement.blur();
+      modalElement.setAttribute("inert", "");
+    }
+
+    const modalInstance = bootstrap.Modal.getInstance(modalElement);
+    if (modalInstance) {
+      modalInstance.dispose();
+    }
+
     setTimeout(() => {
-      removeModal(modalElement);
+      modalElement.remove();
     }, 500);
   });
 }

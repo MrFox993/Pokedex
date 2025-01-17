@@ -59,12 +59,12 @@ function getNoResultsHTMLTemplate() {
 
 function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
   return `
-    <div class="modal fade" id="pokemonInfoModal" tabindex="-1" aria-labelledby="pokemonInfoModalLabel">
+    <div class="modal fade" id="pokemonInfoModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="pokemonInfoModalLabel">#${pokemonId} - ${pokemon.name}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
           </div>
           <div class="modal-body p-0">
             <div class="d-flex flex-column align-items-center ${pokemon.types[0]}">
@@ -84,17 +84,17 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
             <div class="modal-footer d-flex column align-items-center">
                 <ul class="nav nav-tabs mt-4 w-100 d-flex align-items-center justify-content-evenly" id="pokemonTab" role="tablist">
                 <li class="nav-item w-33 text-center" role="presentation">
-                    <button class="nav-link w-100 active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" aria-controls="about" aria-selected="true">About</button>
+                    <button class="nav-link w-100 active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">About</button>
                 </li>
                 <li class="nav-item w-33 text-center" role="presentation">
-                    <button class="nav-link w-100" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab" aria-controls="stats" aria-selected="false">Stats</button>
+                    <button class="nav-link w-100" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab">Stats</button>
                 </li>
                 <li class="nav-item w-33 text-center" role="presentation">
-                    <button class="nav-link w-100" id="evolutions-tab" data-bs-toggle="tab" data-bs-target="#evolutions" type="button" role="tab" aria-controls="evolutions" aria-selected="false">Evolutions</button>
+                    <button class="nav-link w-100" id="evolutions-tab" data-bs-toggle="tab" data-bs-target="#evolutions" type="button" role="tab">Evolutions</button>
                 </li>
                 </ul>
                 <div class="tab-content mt-3">
-                <div class="tab-pane fade show active max-w-480" id="about" role="tabpanel" aria-labelledby="about-tab">
+                <div class="tab-pane fade show active max-w-480" id="about" role="tabpanel">
                     <p class=""><strong>${pokemon.species_flavor_text}</strong></p>
                     <table>
                         <tr>
@@ -111,7 +111,7 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
                         </tr>
                     </table>
                 </div>
-                <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
+                <div class="tab-pane fade" id="stats" role="tabpanel">
                 <table>
                 <tr>
                     <td><strong>HP</strong></td>
@@ -120,7 +120,7 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: ${
                               pokemon.stats.hp
-                            }%" aria-valuenow="${pokemon.stats.hp}" aria-valuemin="0" aria-valuemax="100"></div>
+                            }%"></div>
                         </div>
                     </td>
                 </tr>
@@ -131,7 +131,7 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: ${
                               pokemon.stats.attack
-                            }%" aria-valuenow="${pokemon.stats.attack}" aria-valuemin="0" aria-valuemax="100"></div>
+                            }%"></div>
                         </div>
                     </td>
                 </tr>
@@ -142,7 +142,7 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: ${
                               pokemon.stats.defense
-                            }%" aria-valuenow="${pokemon.stats.defense}" aria-valuemin="0" aria-valuemax="100"></div>
+                            }%"></div>
                         </div>
                     </td>
                 </tr>
@@ -153,9 +153,7 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: ${
                               pokemon.stats.special_attack
-                            }%" aria-valuenow="${
-    pokemon.stats.special_attack
-  }" aria-valuemin="0" aria-valuemax="100"></div>
+                            }%"></div>
                         </div>
                     </td>
                 </tr>
@@ -166,15 +164,13 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
                         <div class="progress">
                             <div class="progress-bar" role="progressbar" style="width: ${
                               pokemon.stats.special_defense
-                            }%" aria-valuenow="${
-    pokemon.stats.special_defense
-  }" aria-valuemin="0" aria-valuemax="100"></div>
+                            }%"></div>
                         </div>
                     </td>
                 </tr>
             </table>
                 </div>
-                <div class="tab-pane fade" id="evolutions" role="tabpanel" aria-labelledby="evolutions-tab">
+                <div class="tab-pane fade" id="evolutions" role="tabpanel">
                     <div id="evolution-chain" class="d-flex justify-content-center align-items-center">
                         <p>No available Evolutions.</p>
                     </div>
