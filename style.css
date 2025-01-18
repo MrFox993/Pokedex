@@ -1,180 +1,170 @@
-
 .main-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    max-width: 1920px;
-    margin-bottom: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  max-width: 1920px;
+  margin-bottom: 200px;
 }
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
 }
 .flex {
-    display: flex;
+  display: flex;
 }
 
 .column {
-    flex-direction: column;
+  flex-direction: column;
 }
 
 .row {
-    flex-direction: row;
+  flex-direction: row;
 }
 
 .card-header {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: self-end;
-    background-color: rgb(8, 50, 64) !important;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: self-end;
+  background-color: rgb(8, 50, 64) !important;
 }
 
-h3,h5 {
-    font-size: 2.5rem !important;
+h3,
+h5 {
+  font-size: 2.5rem !important;
 }
 
 .card {
-    color: white !important;
-    width: 26rem;
+  color: white !important;
+  width: 26rem;
 }
 
 .card:hover {
-    box-shadow: 0 0 1rem 0.5rem rgb(73, 88, 93);
-    cursor: pointer;
-    width: calc(26rem + 0.5rem);
-    transition: 75ms;
+  box-shadow: 0 0 1rem 0.5rem rgb(73, 88, 93);
+  cursor: pointer;
+  transform: scale(1.05);
+  transition: 75ms;
 }
 
 .text-body-secondary {
-    --bs-secondary-color: white;
+  --bs-secondary-color: white;
 }
 
 .card-body {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .card-footer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: rgb(8, 50, 64) !important;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgb(8, 50, 64) !important;
 }
 
 .card-footer img {
-    width: 80px;
-    height: 80px;
-    border-radius: 1rem;
+  width: 80px;
+  height: 80px;
+  border-radius: 1rem;
 }
 
 h1 {
-    color: black !important;
-    text-align: center;
+  color: black !important;
+  text-align: center;
 }
 
 .no-results-header {
-    height: 54px;
+  height: 54px;
 }
 
 .no-results-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 320px;
 }
 
 .no-results-footer {
-    height: 96px;
+  height: 96px;
 }
 
 @media (min-width: 1921px) {
-    h3, h5 {
-        font-size: 3rem !important;
-    }
-    .card {
-        width: 28rem;
-    }
-    .card:hover {
-        width: calc(28rem + 0.5rem);
-    }
-    .card-footer img {
-        width: 120px;
-        height: 120px;
-    }
+  h3,
+  h5 {
+    font-size: 3rem !important;
+  }
+
+  .card {
+    width: 28rem;
+  }
+
+  .card-footer img {
+    width: 120px;
+    height: 120px;
+  }
 }
 
 @media (max-width: 1920px) {
-    h3, h5 {
-        font-size: 2rem !important;
-    }
-    .card {
-        width: 20rem;
-    }
-    .card:hover {
-        width: calc(20rem + 0.5rem);
-    }
-    .main-content {
-        margin-bottom: 100px;
-    }
+  h3,
+  h5 {
+    font-size: 2rem !important;
+  }
+
+  .card {
+    width: 20rem;
+  }
+
+  .main-content {
+    margin-bottom: 100px;
+  }
 }
 
 @media (max-width: 1440px) {
-    .card {
-        width: 16rem;
-    }
+  .card {
+    width: 16rem;
+  }
 
-    .card:hover {
-        width: calc(16rem + 0.5rem);
-    }
+  h3,
+  h5 {
+    font-size: 1rem !important;
+  }
 
-    h3, h5 {
-        font-size: 1.0rem !important;
-    }
-
-    .main-content {
-        margin-bottom: 50px;
-    }
+  .main-content {
+    margin-bottom: 50px;
+  }
 }
 
 @media (max-width: 1024px) {
-    .card {
-        width: 12rem;
-    }
+  .card {
+    width: 12rem;
+  }
 
-    .card:hover {
-        width: calc(12rem + 0.5rem);
-    }
+  .card-footer img {
+    width: 50px;
+    height: 50px;
+  }
 
-    .card-footer img {
-        width: 50px;
-        height: 50px;
-    }
-
-    h3, h5 {
-        font-size: 1rem !important;
-    }
+  h3,
+  h5 {
+    font-size: 1rem !important;
+  }
 }
 
 @media (max-width: 800px) {
-    .card {
-        width: 8rem;
-    }
+  .card {
+    width: 8rem;
+  }
 
-    .card:hover {
-        width: calc(8rem + 0.5rem);
-    }
+  .card-footer img {
+    width: 30px;
+    height: 30px;
+  }
 
-    .card-footer img {
-        width: 30px;
-        height: 30px;
-    }
-
-    .card-header {
-        flex-direction: column;
-        align-items: center;
-    }
+  .card-header {
+    flex-direction: column;
+    align-items: center;
+  }
 }
