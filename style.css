@@ -28,8 +28,9 @@
 
 .card-header {
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
-  align-items: self-end;
+  align-items: flex-start;
   background-color: rgb(8, 50, 64) !important;
 }
 
@@ -40,7 +41,7 @@ h5 {
 
 .card {
   color: white !important;
-  width: 26rem;
+  width: 17rem;
 }
 
 .card:hover {
@@ -91,22 +92,6 @@ h1 {
   height: 96px;
 }
 
-@media (min-width: 1921px) {
-  h3,
-  h5 {
-    font-size: 3rem !important;
-  }
-
-  .card {
-    width: 28rem;
-  }
-
-  .card-footer img {
-    width: 120px;
-    height: 120px;
-  }
-}
-
 @media (max-width: 1920px) {
   h3,
   h5 {
@@ -114,7 +99,7 @@ h1 {
   }
 
   .card {
-    width: 20rem;
+    width: 14rem;
   }
 
   .main-content {
@@ -124,7 +109,12 @@ h1 {
 
 @media (max-width: 1440px) {
   .card {
-    width: 16rem;
+    width: 10rem;
+  }
+
+  .card-footer img {
+    width: 60px;
+    height: 60px;
   }
 
   h3,
@@ -139,12 +129,13 @@ h1 {
 
 @media (max-width: 1024px) {
   .card {
-    width: 12rem;
+    width: 9rem;
   }
 
   .card-footer img {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
+    border-radius: 6px;
   }
 
   h3,
@@ -155,7 +146,7 @@ h1 {
 
 @media (max-width: 800px) {
   .card {
-    width: 8rem;
+    width: 7rem;
   }
 
   .card-footer img {
