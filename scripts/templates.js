@@ -81,17 +81,18 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
                 <p><strong>Types:</strong> ${pokemon.types.join(", ")}</p>
               </div>
             <div class="modal-footer d-flex column align-items-center">
-                <ul class="nav nav-tabs mt-4 w-100 d-flex align-items-center justify-content-evenly" id="pokemonTab" role="tablist">
-                <li class="nav-item w-33 text-center" role="presentation">
-                    <button class="nav-link w-100 active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab">About</button>
-                </li>
-                <li class="nav-item w-33 text-center" role="presentation">
-                    <button class="nav-link w-100" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab">Stats</button>
-                </li>
-                <li class="nav-item w-33 text-center" role="presentation">
-                    <button class="nav-link w-100" id="evolutions-tab" data-bs-toggle="tab" data-bs-target="#evolutions" type="button" role="tab">Evolutions</button>
-                </li>
-                </ul>
+            <ul class="nav nav-tabs mt-4 w-100 d-flex align-items-center justify-content-evenly" id="pokemonTab" role="tablist">
+            <li class="nav-item w-33 text-center" role="presentation">
+              <button class="nav-link w-100 active" id="about-tab" data-bs-toggle="tab" data-bs-target="#about" type="button" role="tab" onclick="event.stopPropagation()">About</button>
+            </li>
+            <li class="nav-item w-33 text-center" role="presentation">
+              <button class="nav-link w-100" id="stats-tab" data-bs-toggle="tab" data-bs-target="#stats" type="button" role="tab" onclick="event.stopPropagation()">Stats</button>
+            </li>
+            <li class="nav-item w-33 text-center" role="presentation">
+              <button class="nav-link w-100" id="evolutions-tab" data-bs-toggle="tab" data-bs-target="#evolutions" type="button" role="tab" onclick="event.stopPropagation()">Evolutions</button>
+            </li>
+          </ul>
+          
                 <div class="tab-content mt-3">
                 <div class="tab-pane fade show active max-w-480" id="about" role="tabpanel">
                     <p class=""><strong>${pokemon.species_flavor_text}</strong></p>
