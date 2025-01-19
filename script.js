@@ -277,12 +277,10 @@ function checkFilteredPokemonList() {
 async function loadPokemonInfoCard(pokemonIndex) {
   let pokemon = allPokemon[pokemonIndex];
   let pokemonId = Intl.NumberFormat("de-DE", { minimumIntegerDigits: 3 }).format(pokemon.id);
-  let modalHTML = getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId);
+  let modalRef = document.getElementById('pokemonInfoModal')
+  modalRef.innerHTML = getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId);
 
-  document.body.insertAdjacentHTML("beforeend", modalHTML);
-
-  let modalElement = document.getElementById("pokemonInfoModal");
-  showModal(modalElement);
+  showModal();
 
   let evolutionData = pokemon.evolution;
 
@@ -298,82 +296,36 @@ async function loadPokemonInfoCard(pokemonIndex) {
     document.getElementById("evolution-chain").innerHTML = `<p class="text-center text-danger">Failed to load evolution data.</p>`;
   }
 
-  handleModalClose(modalElement);
-
   updateNavigationButtons(pokemonIndex);
 }
 
-function showModal(modalElement) {
-  modalElement.classList.add("flip-in");
-  let modalInstance = new bootstrap.Modal(modalElement, {
-    keyboard: true,
-    backdrop: true,
-  });
-  modalInstance.show();
-  removeAriaAttributes(modalElement);
+function showModal() {
+  let modalRef = document.getElementById('pokemonInfoModal');
+  let contentRef = document.getElementById('content');
+  let navbarRef = document.getElementById('nav');
+  modalRef.classList.remove('d_none');
+  modalRef.classList.add('modal-active');
+  contentRef.classList.add('modal-active-bg');
+  navbarRef.classList.add('modal-active-bg');
 }
 
-function removeAriaAttributes(element) {
-  const ariaAttributes = [
-    "aria-hidden",
-    "aria-labelledby",
-    "aria-describedby",
-    "aria-expanded",
-    "aria-controls",
-    "aria-live",
-    "aria-modal",
-    "aria-owns",
-    "aria-pressed",
-    "aria-selected",
-  ];
-
-  ariaAttributes.forEach(attr => element.removeAttribute(attr));
-
-  const elementsWithAria = element.querySelectorAll(
-    ariaAttributes.map(attr => `[${attr}]`).join(", ")
-  );
-  elementsWithAria.forEach(el => {
-    ariaAttributes.forEach(attr => el.removeAttribute(attr));
-  });
+function closeModal() {
+  let modalRef = document.getElementById('pokemonInfoModal');
+  let contentRef = document.getElementById('content');
+  let navbarRef = document.getElementById('nav');
+  modalRef.classList.add('d_none');
+  modalRef.classList.remove('modal-active');
+  contentRef.classList.remove('modal-active-bg');
+  navbarRef.classList.remove('modal-active-bg');
+  modalRef.innerHTML = "";
 }
 
-function handleModalClose(modalElement) {
-  modalElement.addEventListener("hidden.bs.modal", () => {
-    if (document.activeElement && modalElement.contains(document.activeElement)) {
-      document.activeElement.blur();
-      modalElement.setAttribute("inert", "");
-    }
-
-    const modalInstance = bootstrap.Modal.getInstance(modalElement);
-    if (modalInstance) {
-      modalInstance.dispose();
-    }
-
-    setTimeout(() => {
-      modalElement.remove();
-    }, 500);
-  });
-}
-
-function removeModal(modalElement) {
-  modalElement.remove();
-}
-
-function navigatePokemon(index) {
+function navigatePokemon(index, event) {
+  event.stopPropagation();
   checkFilteredPokemonLength(index);
-  let currentModalElement = document.getElementById("pokemonInfoModal");
-  if (currentModalElement) {
-    let currentModalInstance = bootstrap.Modal.getInstance(currentModalElement);
-    currentModalInstance.hide();
-    currentModalElement.addEventListener("hidden.bs.modal", () => {
-      currentModalElement.remove();
-      loadPokemonInfoCard(index);
-      updateNavigationButtons(index);
-    });
-  } else {
-    loadPokemonInfoCard(index);
-    updateNavigationButtons(index);
-  }
+  closeModal();
+  loadPokemonInfoCard(index);
+  updateNavigationButtons(index);
 }
 
 function checkFilteredPokemonLength(index) {

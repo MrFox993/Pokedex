@@ -27,3 +27,17 @@ header{
 .m-width-1920 {
     max-width: 1920px !important;
 }
+
+.modal-active {
+    display: block !important;
+    opacity: 1 !important;
+    backdrop-filter: brightness(0.5);
+    transition: 125ms;
+}
+
+.modal-active-bg {
+    filter: blur(8px);
+    overflow-y: hidden;
+    pointer-events: none;
+    transition: 125ms;
+}

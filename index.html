@@ -32,7 +32,7 @@
   </head>
   <body onload="init()">
     <header>
-      <nav class="navbar navbar-expand-lg bg-navbar">
+      <nav id="nav" class="navbar navbar-expand-lg bg-navbar">
         <div class="container-fluid m-width-1920">
           <a class="navbar-brand" href="./index.html">
             <img src="./assets/img/pokeball.png" alt="logo" class="logo"/>
@@ -49,6 +49,7 @@
         <div id="content" class="content"></div>
         <div id="load-more-btn" class="d-grid gap-2 col-6 mx-auto pt-3 pb-3"></div>
         <div id="loading-overlay" class="d_none"></div>
+        <div class="modal fade" id="pokemonInfoModal" tabindex="-1" onclick="closeModal()"></div>
       </div>
     </main>
     <footer>

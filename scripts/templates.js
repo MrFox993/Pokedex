@@ -59,21 +59,20 @@ function getNoResultsHTMLTemplate() {
 
 function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
   return `
-    <div class="modal fade" id="pokemonInfoModal" tabindex="-1">
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="pokemonInfoModalLabel">#${pokemonId} - ${pokemon.name}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeModal()"></button>
           </div>
           <div class="modal-body p-0">
             <div class="d-flex flex-column align-items-center ${pokemon.types[0]}">
               <div class="d-flex align-items-center">
-                <button id="prevButton" type="button" class="btn btn-secondary" onclick="navigatePokemon(${pokemonIndex - 1})">
+                <button id="prevButton" type="button" class="btn btn-secondary" onclick="navigatePokemon(${pokemonIndex - 1}, event)">
                     <i class="fas fa-arrow-left"></i>
                 </button>
                 <img src="${pokemon.image_shiny}" alt="${pokemon.name}" class="pokemon-image img-fluid" />
-                <button id="nextButton" type="button" class="btn btn-secondary" onclick="navigatePokemon(${pokemonIndex + 1})">
+                <button id="nextButton" type="button" class="btn btn-secondary" onclick="navigatePokemon(${pokemonIndex + 1}, event)">
                     <i class="fas fa-arrow-right"></i>
                 </button>
               </div>
@@ -180,7 +179,6 @@ function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
           </div>
         </div>
       </div>
-    </div>
   `;
 }
 
