@@ -338,13 +338,26 @@ function updateNavigationButtons(index) {
   let prevButton = document.getElementById("prevButton");
   let nextButton = document.getElementById("nextButton");
 
-  if (isFilterActive) {
+  if (isFilterActive || !filteredPokemon || filteredPokemon.length === 0) {
     prevButton.disabled = true;
     prevButton.classList.add("disabled");
     nextButton.disabled = true;
     nextButton.classList.add("disabled");
+    return;
+  }
+  prevButton.disabled = index <= 0;
+  nextButton.disabled = index >= filteredPokemon.length - 1;
+  toggleButtonState(prevButton, index > 0);
+  toggleButtonState(nextButton, index < filteredPokemon.length - 1);
+}
+
+function toggleButtonState(button, isEnabled) {
+  if (isEnabled) {
+    button.disabled = false;
+    button.classList.remove("disabled");
   } else {
-    checkPokemonIndexOnEndList(index);
+    button.disabled = true;
+    button.classList.add("disabled");
   }
 }
 

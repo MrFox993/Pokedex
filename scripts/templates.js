@@ -60,7 +60,7 @@ function getNoResultsHTMLTemplate() {
 function getModalContentHTMLTemplate(pokemon, pokemonIndex, pokemonId) {
   return `
       <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
+        <div class="modal-content" onclick="event.stopPropagation()">
           <div class="modal-header">
             <h5 class="modal-title" id="pokemonInfoModalLabel">#${pokemonId} - ${pokemon.name}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="closeModal()"></button>
